@@ -25,7 +25,18 @@ window_controler_t *create(int (*create)(window_controler_t *),
 
 static int game_controller(window_controler_t *manager)
 {
-    manager = manager;
+    int ret_code = 0;
+    scenne_entity_t *curr;
+
+    while (sfRenderWindow_isOpen(manager->win)) {
+        curr = get_current_scenne_entity(manager);
+        if (curr == NULL) {
+            sfRenderWindow_close(manager->win);
+            ret_code = 84;
+        } else {
+            ret_code = curr->update(curr, manager);
+        }
+    }
     return (0);
 }
 
