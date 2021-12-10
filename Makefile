@@ -5,7 +5,7 @@
 ## sample description
 ##
 
-TARGET		=	...
+TARGET		=	my_runner
 
 LIB_TARGET	=	lib/libmy.a
 
@@ -17,7 +17,9 @@ OBJDIR		=	obj/
 
 VPATH		=	$(SRCDIR) $(OBJDIR) lib/ include/ tests/
 
-SRC		:=	$(wildcard $(SRCDIR)*.c)
+SRC		:=	$(wildcard $(SRCDIR)*.c) \
+			$(wildcard $(SRCDIR)intro/*.c) \
+			$(wildcard $(SRCDIR)intro/background/*.c)
 SRC		:=	$(filter-out $(SRCDIR)main.c, $(SRC))
 
 OBJ		:=	$(SRC:%.c=%.o)
