@@ -36,6 +36,7 @@ struct object_entity {
     int music_is_playing;
     void (*update)(object_entity_t *, scenne_entity_t *, window_controler_t *);
     object_entity_t *next;
+    void *data;
 };
 
 struct scenne_entity {
@@ -47,6 +48,7 @@ struct scenne_entity {
     sfRenderWindow *win;
     sfClock *clock;
     object_entity_t *objects;
+    void *data;
 };
 
 struct window_controler {
@@ -55,10 +57,14 @@ struct window_controler {
     sfRenderWindow *win;
     sfEvent event;
     sfClock *clock;
+    void *data;
+    int (*create)(window_controler_t *);
+    void (*destroy)(window_controler_t *);
 };
 
 // ****************************************************************************
 // OBJECT_ENTITY_T
+// ****************************************************************************
 
 // ***********************************
 // MUSIC
@@ -126,6 +132,7 @@ int destroy_text(scenne_entity_t *, object_entity_t *);
 
 // ****************************************************************************
 // SCENNE_ENTITY_T
+// ****************************************************************************
 
 /*
 ** create_scenne
@@ -140,11 +147,36 @@ int create_scenne(window_controler_t *,
         void (*)(scenne_entity_t *, window_controler_t *),
         void (*)(scenne_entity_t *, window_controler_t *));
 
-/* destroy_scenne
+/*
+** destroy_scenne
 ** destroy a scenne entity in a window controler
 ** window_controler_t *: the window controler
 ** scenne_entity_t *: the scenne to destroy
 */
 void destroy_scenne(window_controler_t *, scenne_entity_t *);
+
+// ****************************************************************************
+// WINDOW_CONTROLER_T
+// ****************************************************************************
+
+/*
+** create
+** create a window manager
+** int (*)(..): function executed before window start
+** void (*)(..): function executed at the end
+*/
+window_controler_t *create(int (*)(window_controler_t *),
+        void (*)(window_controler_t *));
+
+/*
+** start
+** start the game/scennes
+** window_controler_t *: the window created by create()
+** char const *: the window title
+** sfVideoMode: width, height bpp (see csfml doc for more details)
+** sfUint32: style of teh window (sfResize / sfFulScreen ..)
+*/
+int start(window_controler_t *, char const *, sfVideoMode,
+        sfUint32);
 
 #endif
