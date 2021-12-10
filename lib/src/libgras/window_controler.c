@@ -23,23 +23,6 @@ window_controler_t *create(int (*create)(window_controler_t *),
     return (new);
 }
 
-static int game_controller(window_controler_t *manager)
-{
-    int ret_code = 0;
-    scenne_entity_t *curr;
-
-    while (sfRenderWindow_isOpen(manager->win)) {
-        curr = get_current_scenne_entity(manager);
-        if (curr == NULL) {
-            sfRenderWindow_close(manager->win);
-            ret_code = 84;
-        } else {
-            ret_code = curr->update(curr, manager);
-        }
-    }
-    return (0);
-}
-
 static void end(window_controler_t *manager)
 {
     scenne_entity_t *curr = manager->scennes;
@@ -52,6 +35,7 @@ static void end(window_controler_t *manager)
     }
     manager->destroy(manager);
     sfRenderWindow_destroy(manager->win);
+    free(manager);
 }
 
 int start(window_controler_t *manager, char const *title, sfVideoMode mode,
@@ -65,7 +49,8 @@ int start(window_controler_t *manager, char const *title, sfVideoMode mode,
         return (84);
     if (manager->create(manager) == 0)
         return (84);
-    manager->win = sfRenderWindow_create(mode, title, style, NULL);
+    manager->win = sfRenderWindow_create(mode, title, style | sfClose, NULL);
+    sfRenderWindow_setFramerateLimit(manager->win, 60);
     ret_code = game_controller(manager);
     end(manager);
     return (ret_code);

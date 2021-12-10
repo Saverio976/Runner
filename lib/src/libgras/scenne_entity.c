@@ -41,11 +41,14 @@ int create_scenne(window_controler_t *manager,
     if (last == NULL) {
         manager->scennes = new;
         new->next = NULL;
+        new->zindex = 0;
+        manager->current_zindex = 0;
         return (1);
     }
     while (last->next != NULL)
         last = last->next;
     last->next = new;
+    new->zindex = last->zindex + 1;
     new->next = NULL;
     return (1);
 }

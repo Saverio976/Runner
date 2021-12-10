@@ -5,8 +5,8 @@
 ** abstract csfml
 */
 
-#ifndef MYRUNNER_H_
-    #define MYRUNNER_H_
+#ifndef LIBGRAS_H_
+    #define LIBGRAS_H_
 
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
@@ -185,5 +185,8 @@ window_controler_t *create(int (*)(window_controler_t *),
 */
 int start(window_controler_t *, char const *, sfVideoMode,
         sfUint32);
+
+// dont use it
+int game_controller(window_controler_t *);
 
 #endif
