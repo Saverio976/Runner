@@ -5,12 +5,15 @@
 ** the main entry point for the project
 */
 
+#include "my_gras.h"
 #include "my_runner.h"
 #include "my_puts.h"
 
-int main(int ac, char **av)
+int main(void)
 {
-    for (int i = 0; i < ac; i++)
-        my_printf("%s\n", av[i]);
-    return (0);
+    sfVideoMode mode = {800, 600, 32};
+    window_controler_t *manager = create(&w_create_runner, &w_destroy_runner);
+
+    create_scenne(manager, &s_create_intro, &s_update_intro, &s_destroy_intro);
+    return (start(manager, "Geometry Dash", mode, sfResize));
 }
