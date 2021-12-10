@@ -26,7 +26,7 @@ static void *destroy_error(object_entity_t *obj, int first, int second)
 }
 
 static object_entity_t *create_text_create(char const *path, sfVector2f pos,
-        void (*update_ptr)(object_entity_t *, scenne_entity_t *,
+        int (*update_ptr)(object_entity_t *, scenne_entity_t *,
             window_controler_t *))
 {
     object_entity_t *new = malloc(sizeof(object_entity_t));
@@ -49,7 +49,7 @@ static object_entity_t *create_text_create(char const *path, sfVector2f pos,
 
 int create_text(scenne_entity_t *scene, char const *path,
         sfVector2f pos,
-        void (*update_ptr)(object_entity_t *, scenne_entity_t *,
+        int (*update_ptr)(object_entity_t *, scenne_entity_t *,
             window_controler_t *))
 {
     object_entity_t *cursor = scene->objects;
