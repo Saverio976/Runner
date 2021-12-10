@@ -11,7 +11,7 @@
 
 static scenne_entity_t *create_scenne_create(window_controler_t *manager,
         int (*create)(scenne_entity_t *, window_controler_t *),
-        void (*update)(scenne_entity_t *, window_controler_t *),
+        int (*update)(scenne_entity_t *, window_controler_t *),
         void (*destroy)(scenne_entity_t *, window_controler_t *))
 {
     scenne_entity_t *new = malloc(sizeof(scenne_entity_t));
@@ -29,7 +29,7 @@ static scenne_entity_t *create_scenne_create(window_controler_t *manager,
 
 int create_scenne(window_controler_t *manager,
         int (*create)(scenne_entity_t *, window_controler_t *),
-        void (*update)(scenne_entity_t *, window_controler_t *),
+        int (*update)(scenne_entity_t *, window_controler_t *),
         void (*destroy)(scenne_entity_t *, window_controler_t *))
 {
     scenne_entity_t *last = manager->scennes;
@@ -85,4 +85,15 @@ void destroy_scenne(window_controler_t *manager, scenne_entity_t *scenne)
     scenne->destroy(scenne, manager);
     destroy_all_scenne_obj(scenne);
     free(scenne);
+}
+
+scenne_entity_t *get_current_scenne_entity(window_controler_t *manager)
+{
+    scenne_entity_t *curr = manager->scennes;
+
+    if (curr == NULL)
+        return (NULL);
+    while (curr != NULL && curr->zindex != manager->current_zindex)
+        curr = curr->next;
+    return (curr);
 }
