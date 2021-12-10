@@ -34,7 +34,7 @@ struct object_entity {
     int object_is_visible;
     int music_is_looping;
     int music_is_playing;
-    void (*update)(object_entity_t *, scenne_entity_t *, window_controler_t *);
+    int (*update)(object_entity_t *, scenne_entity_t *, window_controler_t *);
     object_entity_t *next;
     void *data;
 };
@@ -43,7 +43,7 @@ struct scenne_entity {
     int zindex;
     struct scenne_entity *next;
     int (*create)(scenne_entity_t *, window_controler_t *);
-    void (*update)(scenne_entity_t *, window_controler_t *);
+    int (*update)(scenne_entity_t *, window_controler_t *);
     void (*destroy)(scenne_entity_t *, window_controler_t *);
     sfRenderWindow *win;
     sfClock *clock;
@@ -78,7 +78,7 @@ struct window_controler {
 ** void (*)(..): the update funtion to call at each frame
 */
 int create_music(scenne_entity_t *, char const *, int,
-        void (*)(object_entity_t *, scenne_entity_t *, window_controler_t *));
+        int (*)(object_entity_t *, scenne_entity_t *, window_controler_t *));
 
 /* destroy_music
 ** destroy a music object
@@ -99,7 +99,7 @@ int destroy_music(scenne_entity_t *, object_entity_t *);
 ** void (*)(..): the update funtion to call at each frame
 */
 int create_picture(scenne_entity_t *, char const *, sfVector2i,
-        void (*)(object_entity_t *, scenne_entity_t *, window_controler_t *));
+        int (*)(object_entity_t *, scenne_entity_t *, window_controler_t *));
 
 /* destroy_picture
 ** destroy a sprite object
@@ -120,7 +120,7 @@ int destroy_picture(scenne_entity_t *, object_entity_t *);
 ** void (*)(..): the update function call each frame
 */
 int create_text(scenne_entity_t *, char const *, sfVector2f,
-        void (*)(object_entity_t *, scenne_entity_t *, window_controler_t *));
+        int (*)(object_entity_t *, scenne_entity_t *, window_controler_t *));
 
 /*
 ** destroy_text
@@ -144,7 +144,7 @@ int destroy_text(scenne_entity_t *, object_entity_t *);
 */
 int create_scenne(window_controler_t *,
         int (*)(scenne_entity_t *, window_controler_t *),
-        void (*)(scenne_entity_t *, window_controler_t *),
+        int (*)(scenne_entity_t *, window_controler_t *),
         void (*)(scenne_entity_t *, window_controler_t *));
 
 /*
@@ -154,6 +154,13 @@ int create_scenne(window_controler_t *,
 ** scenne_entity_t *: the scenne to destroy
 */
 void destroy_scenne(window_controler_t *, scenne_entity_t *);
+
+/*
+** get_current_scenne_entity
+** get the current scene
+** window_controler_t *: the window controler
+*/
+scenne_entity_t *get_current_scenne_entity(window_controler_t *);
 
 // ****************************************************************************
 // WINDOW_CONTROLER_T
