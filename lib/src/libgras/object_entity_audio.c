@@ -58,11 +58,15 @@ int destroy_music(scenne_entity_t *scene, object_entity_t *obj)
 
     if (obj->type != MUSIC || last == NULL)
         return (0);
-    while (last != NULL && last->next != obj)
-        last = last->next;
-    if (last == NULL)
-        return (0);
-    last->next = obj->next;
+    if (last == obj)
+        scene->objects = obj->next;
+    else {
+        while (last != NULL && last->next != obj)
+            last = last->next;
+        if (last == NULL)
+            return (0);
+        last->next = obj->next;
+    }
     if (sfMusic_getStatus(obj->music) != sfStopped) {
         sfMusic_setLoop(obj->music, sfFalse);
         sfMusic_stop(obj->music);

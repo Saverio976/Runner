@@ -74,11 +74,15 @@ int destroy_picture(scenne_entity_t *scene, object_entity_t *obj)
 
     if (obj->type != SPRITE || last == NULL)
         return (0);
-    while (last != NULL && last->next != obj)
-        last = last->next;
-    if (last == NULL)
-        return (0);
-    last->next = obj->next;
+    if (last == obj)
+        scene->objects = obj->next;
+    else {
+        while (last != NULL && last->next != obj)
+            last = last->next;
+        if (last == NULL)
+            return (0);
+        last->next = obj->next;
+    }
     destroy_error(obj, 1, 1);
     return (1);
 }
