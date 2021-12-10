@@ -1,0 +1,16 @@
+name: NorMatrix Check
+
+on: [push]
+
+jobs:
+  normatrix:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: clone NorMatrix
+      run: git clone https://github.com/Saverio976/NorMatrix
+
+    - name: NorMatrix
+      run: make -C NorMatrix PATH_CHECK=$PWD

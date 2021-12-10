@@ -1,0 +1,29 @@
+name: Makefile Check
+
+on: [push]
+
+jobs:
+  makefile:
+    runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker:latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: make
+      run: make
+
+    - name: make re
+      run: make re
+
+    - name: make fclean
+      run: make fclean
+
+    - name: make all
+      run: make all
+
+    - name: make clean
+      run: make clean
+
+    - name: make tests_run
+      run: make tests_run
