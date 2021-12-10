@@ -18,6 +18,7 @@ static scenne_entity_t *create_scenne_create(window_controler_t *manager,
 
     if (new == NULL)
         return (NULL);
+    new->objects = NULL;
     if (create(new, manager) == 0)
         return (NULL);
     new->create = create;
@@ -49,15 +50,39 @@ int create_scenne(window_controler_t *manager,
     return (1);
 }
 
+static void destroy_all_scenne_obj(scenne_entity_t *scenne)
+{
+    object_entity_t *curr = scenne->objects;
+    object_entity_t *tmp;
+
+    while (curr != NULL) {
+        tmp = curr->next;
+        if (curr->type == MUSIC)
+            destroy_music(scenne, curr);
+        if (curr->type == TEXT)
+            destroy_text(scenne, curr);
+        if (curr->type == SPRITE)
+            destroy_picture(scenne, curr);
+        curr = tmp;
+    }
+}
+
 void destroy_scenne(window_controler_t *manager, scenne_entity_t *scenne)
 {
     scenne_entity_t *last = manager->scennes;
 
     if (last == NULL)
         return;
-    while (last != scenne && last->next != scenne)
-        last = last->next;
-    last->next = scenne->next;
+    if (last == scenne)
+        manager->scennes = scenne->next;
+    else {
+        while (last != NULL && last->next != scenne)
+            last = last->next;
+        if (last == NULL)
+            return;
+        last->next = scenne->next;
+    }
     scenne->destroy(scenne, manager);
+    destroy_all_scenne_obj(scenne);
     free(scenne);
 }
