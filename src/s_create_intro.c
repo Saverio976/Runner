@@ -12,8 +12,11 @@
 int s_create_intro(scenne_entity_t *scenne,
         __attribute__((unused)) window_controler_t *manager)
 {
-    sfVector2i pos = {0, 0};
+    sfVector2f pos = {0.0, 0.0};
 
     create_picture(scenne, INTRO_BG_PATH, pos, &o_update_intro_background);
+    scenne->clock = sfClock_create();
+    if (scenne->clock == NULL)
+        return (0);
     return (1);
 }

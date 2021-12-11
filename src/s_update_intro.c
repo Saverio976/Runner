@@ -8,8 +8,10 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
-int s_update_intro(__attribute__((unused)) scenne_entity_t *scenne,
-        __attribute__((unused)) window_controler_t *manager)
+int s_update_intro(scenne_entity_t *scenne,
+        window_controler_t *manager)
 {
+    if (sfTime_asSeconds(sfClock_getElapsedTime(scenne->clock)) > 5.0)
+        manager->current_zindex = 1;
     return (0);
 }

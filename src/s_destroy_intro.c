@@ -8,8 +8,9 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
-void s_destroy_intro(__attribute__((unused)) scenne_entity_t *scenne,
+void s_destroy_intro(scenne_entity_t *scenne,
         __attribute__((unused)) window_controler_t *manager)
 {
+    sfClock_destroy(scenne->clock);
     return;
 }
