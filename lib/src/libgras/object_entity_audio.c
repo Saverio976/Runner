@@ -28,6 +28,7 @@ static object_entity_t *create_music_create(char const *path, int play,
     if (play)
         sfMusic_play(new->music);
     new->update = update_ptr;
+    new->next = NULL;
     return (new);
 }
 

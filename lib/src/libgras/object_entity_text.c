@@ -45,6 +45,7 @@ static object_entity_t *create_text_create(char const *path, sfVector2f pos,
     new->pos = pos;
     new->update = update_ptr;
     new->object_is_visible = 0;
+    new->next = NULL;
     return (new);
 }
 
