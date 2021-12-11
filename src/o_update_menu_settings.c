@@ -8,6 +8,14 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
+static void update_current_zindex(window_controler_t *manager)
+{
+    if (sfTime_asSeconds(sfClock_getElapsedTime(manager->clock)) < 0.5)
+        return;
+    manager->current_zindex = 2;
+    sfClock_restart(manager->clock);
+}
+
 int o_update_menu_settings(object_entity_t *obj,
         __attribute__((unused)) scenne_entity_t *scene,
         window_controler_t *manager)
@@ -21,7 +29,7 @@ int o_update_menu_settings(object_entity_t *obj,
         sfText_setCharacterSize(obj->text, 30);
         sfText_setFillColor(obj->text, sfRed);
         if (sfMouse_isButtonPressed(sfMouseLeft))
-            manager->current_zindex = 2;
+            update_current_zindex(manager);
     } else {
         sfText_setCharacterSize(obj->text, 28);
         sfText_setFillColor(obj->text, sfWhite);
