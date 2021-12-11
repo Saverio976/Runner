@@ -42,6 +42,7 @@ static object_entity_t *create_text_create(char const *path, sfVector2f pos,
         return (destroy_error(new, 1, 0));
     sfText_setFont(new->text, new->font);
     sfText_setPosition(new->text, pos);
+    new->pos = pos;
     new->update = update_ptr;
     new->object_is_visible = 0;
     return (new);

@@ -29,7 +29,7 @@ struct object_entity {
     sfFont *font;
     sfMusic *music;
     sfIntRect rect;
-    sfVector2i pos;
+    sfVector2f pos;
     sfClock *clock;
     int object_is_visible;
     int music_is_looping;
@@ -98,7 +98,7 @@ int destroy_music(scenne_entity_t *, object_entity_t *);
 ** sfVector2i: the position of this sprite
 ** void (*)(..): the update funtion to call at each frame
 */
-int create_picture(scenne_entity_t *, char const *, sfVector2i,
+int create_picture(scenne_entity_t *, char const *, sfVector2f,
         int (*)(object_entity_t *, scenne_entity_t *, window_controler_t *));
 
 /* destroy_picture

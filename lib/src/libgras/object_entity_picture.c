@@ -25,7 +25,7 @@ static void *destroy_error(object_entity_t *obj, int first, int second)
     return (NULL);
 }
 
-static object_entity_t *create_picture_create(char const *path, sfVector2i pos,
+static object_entity_t *create_picture_create(char const *path, sfVector2f pos,
         int (*update_ptr)(object_entity_t *, scenne_entity_t *,
             window_controler_t *))
 {
@@ -41,6 +41,7 @@ static object_entity_t *create_picture_create(char const *path, sfVector2i pos,
     if (new->sprite == NULL)
         return (destroy_error(new, 0, 1));
     sfSprite_setTexture(new->sprite, new->texture, sfTrue);
+    sfSprite_setPosition(new->sprite, pos);
     new->pos = pos;
     new->update = update_ptr;
     new->object_is_visible = 0;
@@ -48,7 +49,7 @@ static object_entity_t *create_picture_create(char const *path, sfVector2i pos,
 }
 
 int create_picture(scenne_entity_t *scene, char const *path,
-        sfVector2i pos,
+        sfVector2f pos,
         int (*update_ptr)(object_entity_t *, scenne_entity_t *,
             window_controler_t *))
 {
