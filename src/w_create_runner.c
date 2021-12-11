@@ -23,8 +23,12 @@ int w_create_runner(window_controler_t *manager)
         free(data);
         return (0);
     }
+    manager->clock = sfClock_create();
+    if (!manager->clock)
+        return (0);
     sfMusic_play(data->music);
     sfMusic_setLoop(data->music, sfTrue);
     data->is_playing = 1;
+    data->global_sound = 1;
     return (1);
 }

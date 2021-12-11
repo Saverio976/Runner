@@ -11,7 +11,7 @@
 int s_update_intro(scenne_entity_t *scenne,
         window_controler_t *manager)
 {
-    if (sfTime_asSeconds(sfClock_getElapsedTime(scenne->clock)) > 5.0)
+    if (sfTime_asSeconds(sfClock_getElapsedTime(scenne->clock)) > 2.0)
         manager->current_zindex = 1;
     return (0);
 }
