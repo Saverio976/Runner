@@ -38,7 +38,7 @@ TEST_OBJ	:=	$(addprefix $(OBJDIR), $(notdir $(TEST_OBJ)))
 CFLAGS		= 	-Iinclude/ -Ilib/include/ -Wall -Wextra -Wpedantic
 
 LFLAGS		=	-Llib/ -lmy -lcsfml-graphics -lcsfml-system \
-			-lcsfml-audio
+			-lcsfml-audio -lcsfml-window
 
 CR_TEST_FLAGS	=	-lcriterion
 
