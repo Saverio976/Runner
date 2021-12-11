@@ -13,7 +13,7 @@
 // MACRO
 
     #define INTRO_BG_PATH "assets/background_intro.png"
-    #define MENU_MUSIC_PATH "assets/forever_bound_stereo_madness.flac"
+    #define MENU_MUSIC_PATH "assets/forever_bound_stereo_madness.ogg"
     #define FONT_PATH "assets/fonts.otf"
     #define PLAY_BUTTON_PATH "assets/play.png"
 
@@ -23,6 +23,7 @@ struct game_runner {
     int life;
     sfMusic *music;
     int is_playing;
+    int global_sound;
 };
 
 // ****************************************************************************
@@ -65,6 +66,26 @@ int o_update_menu_settings(object_entity_t *, scenne_entity_t *,
         window_controler_t *);
 
 int o_update_menu_play(object_entity_t *, scenne_entity_t *,
+        window_controler_t *);
+
+// *****************
+// SETTINGS
+
+int s_create_settings(scenne_entity_t *, window_controler_t *);
+
+int s_update_settings(scenne_entity_t *, window_controler_t *);
+
+void s_destroy_settings(scenne_entity_t *, window_controler_t *);
+
+// OBJ
+
+int o_update_settings_music(object_entity_t *, scenne_entity_t *,
+        window_controler_t *);
+
+int o_update_settings_menu(object_entity_t *, scenne_entity_t *,
+        window_controler_t *);
+
+int o_update_settings_switch(object_entity_t *, scenne_entity_t *,
         window_controler_t *);
 
 #endif
