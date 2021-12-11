@@ -19,6 +19,8 @@ window_controler_t *create(int (*create)(window_controler_t *),
     new->current_zindex = -1;
     new->scennes = NULL;
     new->create = create;
+    if (create(new) == 0)
+        return (NULL);
     new->destroy = destroy;
     return (new);
 }
@@ -46,8 +48,6 @@ int start(window_controler_t *manager, char const *title, sfVideoMode mode,
     if (manager == NULL)
         return (84);
     if (manager->current_zindex < 0)
-        return (84);
-    if (manager->create(manager) == 0)
         return (84);
     manager->win = sfRenderWindow_create(mode, title, style | sfClose, NULL);
     sfRenderWindow_setFramerateLimit(manager->win, 60);
