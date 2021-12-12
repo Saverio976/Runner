@@ -15,13 +15,14 @@ static void check_need_close(window_controler_t *manager)
 
 static int update(scenne_entity_t *curr, window_controler_t *manager)
 {
-    int ret_code = curr->update(curr, manager);
+    int ret_code = 0;
     object_entity_t *obj = curr->objects;
 
     while (ret_code == 0 && obj != NULL) {
         ret_code = obj->update(obj, curr, manager);
         obj = obj->next;
     }
+    ret_code = (ret_code == 0) ? curr->update(curr, manager) : ret_code;
     return (ret_code);
 }
 
