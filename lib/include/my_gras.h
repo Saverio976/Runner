@@ -148,6 +148,13 @@ int create_scenne(window_controler_t *,
         void (*)(scenne_entity_t *, window_controler_t *));
 
 /*
+** destroy_all_scenne_obj
+** destroy all scene obj of a scene
+** scenne_entity_t *: the scene
+*/
+void destroy_all_scenne_obj(scenne_entity_t *);
+
+/*
 ** destroy_scenne
 ** destroy a scenne entity in a window controler
 ** window_controler_t *: the window controler
