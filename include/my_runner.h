@@ -18,6 +18,7 @@
     #define PLAY_BUTTON_PATH "assets/play.png"
 
 typedef struct game_runner game_runner_t;
+typedef struct game_player game_player_t;
 
 struct game_runner {
     int life;
@@ -31,6 +32,16 @@ struct game_runner {
     char const *map_txt;
     char const *block;
     char const *spike;
+    char const *player;
+};
+
+struct game_player {
+    sfTexture *texture;
+    sfSprite *sprite;
+    int gravity;
+    sfVector2f pos;
+    int buffer_gravity;
+    int on_ground;
 };
 
 // ****************************************************************************
