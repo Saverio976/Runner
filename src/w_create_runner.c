@@ -9,6 +9,22 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
+static const char *BG_PATHS[4] = {"assets/blue_bg.jpg", "assets/green_bg.png",
+    "assets/purple_bg.jpg", "assets/red_bg.png"};
+
+static void create_data(game_runner_t *data)
+{
+    data->is_playing = 1;
+    data->global_sound = 1;
+    data->speed_paralax_1 = 5;
+    data->speed_paralax_2 = 5;
+    data->speed_paralax_3 = 2;
+    data->bg_game = BG_PATHS[0];
+    data->block = "assets/block.png";
+    data->spike = "assets/spike.png";
+    data->map_txt = "map/basic.txt";
+}
+
 int w_create_runner(window_controler_t *manager)
 {
     game_runner_t *data;
@@ -28,7 +44,6 @@ int w_create_runner(window_controler_t *manager)
         return (0);
     sfMusic_play(data->music);
     sfMusic_setLoop(data->music, sfTrue);
-    data->is_playing = 1;
-    data->global_sound = 1;
+    create_data(data);
     return (1);
 }

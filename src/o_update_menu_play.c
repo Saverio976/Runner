@@ -9,7 +9,7 @@
 #include "my_runner.h"
 
 int o_update_menu_play(object_entity_t *obj,
-        __attribute__((unused)) scenne_entity_t *scene,
+        scenne_entity_t *scene,
         window_controler_t *manager)
 {
     sfVector2f scale = {0.60, 0.60};
@@ -20,8 +20,10 @@ int o_update_menu_play(object_entity_t *obj,
     if (pos_spr.left <= pos.x && pos.x <= pos_spr.left + pos_spr.width &&
             pos_spr.top <= pos.y && pos.y <= pos_spr.top + pos_spr.height) {
         sfSprite_setScale(obj->sprite, scale);
-        if (sfMouse_isButtonPressed(sfMouseLeft))
+        if (sfMouse_isButtonPressed(sfMouseLeft)) {
             manager->current_zindex = 3;
+            sfClock_restart(scene->next->next->clock);
+        }
     } else {
         sfSprite_setScale(obj->sprite, normal);
     }
