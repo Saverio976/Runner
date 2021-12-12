@@ -18,5 +18,6 @@ int main(void)
     create_scenne(manager, s_create_menu, s_update_menu, s_destroy_menu);
     create_scenne(manager, s_create_settings, s_update_settings,
             s_destroy_settings);
+    create_scenne(manager, s_create_game, s_update_game, s_destroy_game);
     return (start(manager, "Geometry Dash", mode, sfResize));
 }
