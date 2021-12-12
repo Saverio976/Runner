@@ -53,7 +53,7 @@ int create_scenne(window_controler_t *manager,
     return (1);
 }
 
-static void destroy_all_scenne_obj(scenne_entity_t *scenne)
+void destroy_all_scenne_obj(scenne_entity_t *scenne)
 {
     object_entity_t *curr = scenne->objects;
     object_entity_t *tmp;
