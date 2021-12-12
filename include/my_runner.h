@@ -24,7 +24,20 @@ struct game_runner {
     sfMusic *music;
     int is_playing;
     int global_sound;
+    int speed_paralax_1;
+    int speed_paralax_2;
+    int speed_paralax_3;
+    char const *bg_game;
+    char const *map_txt;
+    char const *block;
+    char const *spike;
 };
+
+// ****************************************************************************
+// utility
+// ****************************************************************************
+
+int create_map_obj_from(game_runner_t *, scenne_entity_t *);
 
 // ****************************************************************************
 // WINDOW_CONTROLER
@@ -86,6 +99,26 @@ int o_update_settings_menu(object_entity_t *, scenne_entity_t *,
         window_controler_t *);
 
 int o_update_settings_switch(object_entity_t *, scenne_entity_t *,
+        window_controler_t *);
+
+// *****************
+// GAME
+
+int s_create_game(scenne_entity_t *, window_controler_t *);
+
+int s_update_game(scenne_entity_t *, window_controler_t *);
+
+void s_destroy_game(scenne_entity_t *, window_controler_t *);
+
+// OBJ
+
+int o_update_game_background(object_entity_t *, scenne_entity_t *,
+        window_controler_t *);
+
+int o_update_game_block(object_entity_t *, scenne_entity_t *,
+        window_controler_t *);
+
+int o_update_game_time(object_entity_t *, scenne_entity_t *,
         window_controler_t *);
 
 #endif
