@@ -8,7 +8,7 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
-static void update_current_zindex(window_controler_t *manager)
+static void update_current_zindex(window_controller_t *manager)
 {
     if (sfTime_asSeconds(sfClock_getElapsedTime(manager->clock)) < 0.5)
         return;
@@ -17,8 +17,8 @@ static void update_current_zindex(window_controler_t *manager)
 }
 
 int o_update_settings_menu(object_entity_t *obj,
-        __attribute__((unused)) scenne_entity_t *scene,
-        window_controler_t *manager)
+        __attribute__((unused)) scene_entity_t *scene,
+        window_controller_t *manager)
 {
     sfVector2i pos = sfMouse_getPositionRenderWindow(manager->win);
     sfFloatRect pos_txt = sfText_getGlobalBounds(obj->text);

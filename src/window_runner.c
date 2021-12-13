@@ -27,7 +27,7 @@ static void create_data(game_runner_t *data)
     data->end = "assets/end_block.png";
 }
 
-int w_create_runner(window_controler_t *manager)
+int w_create_runner(window_controller_t *manager)
 {
     game_runner_t *data;
     manager->data = malloc(sizeof(game_runner_t));
@@ -50,7 +50,7 @@ int w_create_runner(window_controler_t *manager)
     return (1);
 }
 
-void w_destroy_runner(window_controler_t *manager)
+void w_destroy_runner(window_controller_t *manager)
 {
     game_runner_t *data = (game_runner_t *) manager->data;
 

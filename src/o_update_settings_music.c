@@ -8,7 +8,7 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
-static void update_music_settings(game_runner_t *data, scenne_entity_t *scene)
+static void update_music_settings(game_runner_t *data, scene_entity_t *scene)
 {
     if (sfTime_asSeconds(sfClock_getElapsedTime(scene->clock)) < 0.2)
         return;
@@ -25,8 +25,8 @@ static void update_music_settings(game_runner_t *data, scenne_entity_t *scene)
 }
 
 int o_update_settings_music(object_entity_t *obj,
-        scenne_entity_t *scene,
-        window_controler_t *manager)
+        scene_entity_t *scene,
+        window_controller_t *manager)
 {
     sfVector2i pos = sfMouse_getPositionRenderWindow(manager->win);
     sfFloatRect pos_txt = sfText_getGlobalBounds(obj->text);

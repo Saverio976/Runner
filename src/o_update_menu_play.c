@@ -9,8 +9,8 @@
 #include "my_runner.h"
 
 int o_update_menu_play(object_entity_t *obj,
-        scenne_entity_t *scene,
-        window_controler_t *manager)
+        scene_entity_t *scene,
+        window_controller_t *manager)
 {
     sfVector2f scale = {0.60, 0.60};
     sfVector2f normal = {0.50, 0.50};

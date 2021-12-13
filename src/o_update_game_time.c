@@ -24,8 +24,8 @@ char *transform_to_str(float time)
 }
 
 int o_update_game_time(object_entity_t *obj,
-        scenne_entity_t *scene,
-        window_controler_t *manager)
+        scene_entity_t *scene,
+        window_controller_t *manager)
 {
     float time = sfTime_asSeconds(sfClock_getElapsedTime(scene->clock));
 

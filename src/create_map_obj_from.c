@@ -10,7 +10,7 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
-static void process_data(game_runner_t *data, scenne_entity_t *scene, char c,
+static void process_data(game_runner_t *data, scene_entity_t *scene, char c,
         sfVector2f pos)
 {
     object_entity_t *obj;
@@ -37,7 +37,7 @@ static void process_data(game_runner_t *data, scenne_entity_t *scene, char c,
         obj->data = NULL;
 }
 
-int create_map_obj_from(game_runner_t *data, scenne_entity_t *scene)
+int create_map_obj_from(game_runner_t *data, scene_entity_t *scene)
 {
     FILE *fd = fopen(data->map_txt, "r");
     char *lineptr = NULL;

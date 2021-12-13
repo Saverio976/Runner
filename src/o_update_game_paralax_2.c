@@ -9,8 +9,8 @@
 #include "my_runner.h"
 
 int o_update_game_paralax_2(object_entity_t *obj,
-        __attribute__((unused)) scenne_entity_t *scene,
-        window_controler_t *manager)
+        __attribute__((unused)) scene_entity_t *scene,
+        window_controller_t *manager)
 {
     game_runner_t *data = manager->data;
     sfFloatRect bounds = sfSprite_getGlobalBounds(obj->sprite);

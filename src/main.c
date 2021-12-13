@@ -12,12 +12,12 @@
 int main(void)
 {
     sfVideoMode mode = {800, 600, 32};
-    window_controler_t *manager = create(w_create_runner, w_destroy_runner);
+    window_controller_t *manager = create(w_create_runner, w_destroy_runner);
 
-    create_scenne(manager, s_create_intro, s_update_intro, s_destroy_intro);
-    create_scenne(manager, s_create_menu, s_update_menu, s_destroy_menu);
-    create_scenne(manager, s_create_settings, s_update_settings,
+    create_scene(manager, s_create_intro, s_update_intro, s_destroy_intro);
+    create_scene(manager, s_create_menu, s_update_menu, s_destroy_menu);
+    create_scene(manager, s_create_settings, s_update_settings,
             s_destroy_settings);
-    create_scenne(manager, s_create_game, s_update_game, s_destroy_game);
+    create_scene(manager, s_create_game, s_update_game, s_destroy_game);
     return (start(manager, "Geometry Dash", mode, sfResize));
 }

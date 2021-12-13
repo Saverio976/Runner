@@ -9,7 +9,7 @@
 #include "my_runner.h"
 
 static int colision_between(game_player_t *player,
-        object_entity_t *obj, window_controler_t *manager)
+        object_entity_t *obj, window_controller_t *manager)
 {
     int passed = 0;
     sfFloatRect pl_bounds = sfSprite_getGlobalBounds(player->sprite);
@@ -34,7 +34,7 @@ static int colision_between(game_player_t *player,
 }
 
 static int update_pos_player(game_player_t *player, object_entity_t *objs,
-        window_controler_t *manager)
+        window_controller_t *manager)
 {
     sfFloatRect bounds;
     sfFloatRect pl_bounds = sfSprite_getGlobalBounds(player->sprite);
@@ -56,7 +56,7 @@ static int update_pos_player(game_player_t *player, object_entity_t *objs,
     return (game_continue);
 }
 
-static void check_loose_player(window_controler_t *manager,
+static void check_loose_player(window_controller_t *manager,
         game_player_t *player, object_entity_t *bg)
 {
     sfFloatRect bounds_bg;
@@ -86,8 +86,8 @@ static void update_gravity(game_player_t *player)
     sfClock_restart(player->clock);
 }
 
-int s_update_game(scenne_entity_t *scene,
-        window_controler_t *manager)
+int s_update_game(scene_entity_t *scene,
+        window_controller_t *manager)
 {
     game_player_t *player = (game_player_t *) scene->data;
     object_entity_t *objs = scene->objects;

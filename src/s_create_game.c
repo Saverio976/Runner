@@ -30,8 +30,8 @@ static int create_scene_data(game_player_t *player, game_runner_t *data)
     return (1);
 }
 
-int restart_game(scenne_entity_t *scene,
-        window_controler_t *manager)
+int restart_game(scene_entity_t *scene,
+        window_controller_t *manager)
 {
     sfVector2f pos_bg = {0, 0};
     sfVector2f pos_txt = {10, 10};
@@ -54,8 +54,8 @@ int restart_game(scenne_entity_t *scene,
     return (1);
 }
 
-int s_create_game(scenne_entity_t *scene,
-        window_controler_t *manager)
+int s_create_game(scene_entity_t *scene,
+        window_controller_t *manager)
 {
     game_runner_t *data = (game_runner_t *) manager->data;
 
