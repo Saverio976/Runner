@@ -26,8 +26,8 @@ static void *destroy_error(object_entity_t *obj, int first, int second)
 }
 
 static object_entity_t *create_picture_create(char const *path, sfVector2f pos,
-        int (*update_ptr)(object_entity_t *, scenne_entity_t *,
-            window_controler_t *))
+        int (*update_ptr)(object_entity_t *, scene_entity_t *,
+            window_controller_t *))
 {
     object_entity_t *new = malloc(sizeof(object_entity_t));
 
@@ -49,10 +49,10 @@ static object_entity_t *create_picture_create(char const *path, sfVector2f pos,
     return (new);
 }
 
-int create_picture(scenne_entity_t *scene, char const *path,
+int create_picture(scene_entity_t *scene, char const *path,
         sfVector2f pos,
-        int (*update_ptr)(object_entity_t *, scenne_entity_t *,
-            window_controler_t *))
+        int (*update_ptr)(object_entity_t *, scene_entity_t *,
+            window_controller_t *))
 {
     object_entity_t *cursor = scene->objects;
     object_entity_t *new = create_picture_create(path, pos, update_ptr);
@@ -70,7 +70,7 @@ int create_picture(scenne_entity_t *scene, char const *path,
     return (1);
 }
 
-int destroy_picture(scenne_entity_t *scene, object_entity_t *obj)
+int destroy_picture(scene_entity_t *scene, object_entity_t *obj)
 {
     object_entity_t *last = scene->objects;
 

@@ -10,8 +10,8 @@
 #include "my_gras.h"
 
 static object_entity_t *create_music_create(char const *path, int play,
-        int (*update_ptr)(object_entity_t *, scenne_entity_t *,
-            window_controler_t *))
+        int (*update_ptr)(object_entity_t *, scene_entity_t *,
+            window_controller_t *))
 {
     object_entity_t *new = malloc(sizeof(object_entity_t));
 
@@ -32,10 +32,10 @@ static object_entity_t *create_music_create(char const *path, int play,
     return (new);
 }
 
-int create_music(scenne_entity_t *scene, char const *path,
+int create_music(scene_entity_t *scene, char const *path,
         int playing_now,
-        int (*update_ptr)(object_entity_t *, scenne_entity_t *,
-            window_controler_t *))
+        int (*update_ptr)(object_entity_t *, scene_entity_t *,
+            window_controller_t *))
 {
     object_entity_t *cursor = scene->objects;
     object_entity_t *new = create_music_create(path, playing_now, update_ptr);
@@ -53,7 +53,7 @@ int create_music(scenne_entity_t *scene, char const *path,
     return (1);
 }
 
-int destroy_music(scenne_entity_t *scene, object_entity_t *obj)
+int destroy_music(scene_entity_t *scene, object_entity_t *obj)
 {
     object_entity_t *last = scene->objects;
 

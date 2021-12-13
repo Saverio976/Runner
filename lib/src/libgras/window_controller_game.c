@@ -7,13 +7,13 @@
 
 #include "my_gras.h"
 
-static void check_need_close(window_controler_t *manager)
+static void check_need_close(window_controller_t *manager)
 {
     if (manager->event.type == sfEvtClosed)
         sfRenderWindow_close(manager->win);
 }
 
-static int update(scenne_entity_t *curr, window_controler_t *manager)
+static int update(scene_entity_t *curr, window_controller_t *manager)
 {
     int ret_code = 0;
     object_entity_t *obj = curr->objects;
@@ -26,15 +26,15 @@ static int update(scenne_entity_t *curr, window_controler_t *manager)
     return (ret_code);
 }
 
-static int game_loop(window_controler_t *manager, sfClock *clock)
+static int game_loop(window_controller_t *manager, sfClock *clock)
 {
-    scenne_entity_t *curr;
+    scene_entity_t *curr;
     int ret_code = 0;
 
     if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) < 1.0 / 120.0)
         return (0);
     sfRenderWindow_clear(manager->win, sfBlack);
-    curr = get_current_scenne_entity(manager);
+    curr = get_current_scene_entity(manager);
     if (curr == NULL)
         ret_code = 84;
     else
@@ -45,7 +45,7 @@ static int game_loop(window_controler_t *manager, sfClock *clock)
     return (ret_code);
 }
 
-int game_controller(window_controler_t *manager)
+int game_controller(window_controller_t *manager)
 {
     int ret_code = 0;
     sfClock *clock = sfClock_create();
