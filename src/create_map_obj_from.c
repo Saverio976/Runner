@@ -13,6 +13,7 @@
 static void process_data(game_runner_t *data, scenne_entity_t *scene, char c,
         sfVector2f pos)
 {
+    object_entity_t *obj;
     char const *tmp;
 
     if (c == 'b')
@@ -23,11 +24,9 @@ static void process_data(game_runner_t *data, scenne_entity_t *scene, char c,
         return;
     pos.x *= 53;
     pos.y *= 60;
-    if (c == 's') {
-        pos.x -= 30;
-        pos.y -= 21;
-    }
     create_picture(scene, tmp, pos, o_update_game_block);
+    for (obj = scene->objects; obj->next != NULL; obj = obj->next);
+    obj->data = (c == 's') ? (void *) 1 : NULL;
 }
 
 int create_map_obj_from(game_runner_t *data, scenne_entity_t *scene)
