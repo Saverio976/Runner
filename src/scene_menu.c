@@ -9,6 +9,18 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
+int s_update_menu(__attribute__((unused)) scenne_entity_t *scenne,
+        __attribute__((unused)) window_controler_t *manager)
+{
+    return (0);
+}
+
+void s_destroy_menu(__attribute__((unused)) scenne_entity_t *scenne,
+        __attribute__((unused)) window_controler_t *manager)
+{
+    return;
+}
+
 int s_create_menu(scenne_entity_t *scenne,
         __attribute__((unused)) window_controler_t *manager)
 {

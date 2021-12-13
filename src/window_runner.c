@@ -16,7 +16,7 @@ static void create_data(game_runner_t *data)
 {
     data->is_playing = 1;
     data->global_sound = 1;
-    data->speed_paralax_1 = 5;
+    data->speed_paralax_1 = 10;
     data->speed_paralax_2 = 5;
     data->speed_paralax_3 = 2;
     data->bg_game = BG_PATHS[0];
@@ -47,4 +47,19 @@ int w_create_runner(window_controler_t *manager)
     sfMusic_setLoop(data->music, sfTrue);
     create_data(data);
     return (1);
+}
+
+void w_destroy_runner(window_controler_t *manager)
+{
+    game_runner_t *data = (game_runner_t *) manager->data;
+
+    if (data == NULL)
+        return;
+    if (data->is_playing) {
+        sfMusic_setLoop(data->music, sfFalse);
+        sfMusic_stop(data->music);
+    }
+    sfMusic_destroy(data->music);
+    sfClock_destroy(manager->clock);
+    free(manager->data);
 }

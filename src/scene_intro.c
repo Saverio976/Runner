@@ -9,6 +9,21 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
+void s_destroy_intro(scenne_entity_t *scenne,
+        __attribute__((unused)) window_controler_t *manager)
+{
+    sfClock_destroy(scenne->clock);
+    return;
+}
+
+int s_update_intro(scenne_entity_t *scenne,
+        window_controler_t *manager)
+{
+    if (sfTime_asSeconds(sfClock_getElapsedTime(scenne->clock)) > 2.0)
+        manager->current_zindex = 1;
+    return (0);
+}
+
 int s_create_intro(scenne_entity_t *scenne,
         __attribute__((unused)) window_controler_t *manager)
 {

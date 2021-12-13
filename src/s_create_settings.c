@@ -8,6 +8,18 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
+int s_update_settings(__attribute__((unused)) scenne_entity_t *scenne,
+        __attribute__((unused)) window_controler_t *manager)
+{
+    return (0);
+}
+
+void s_destroy_settings(__attribute__((unused)) scenne_entity_t *scene,
+        __attribute__((unused)) window_controler_t *manager)
+{
+    sfClock_destroy(scene->clock);
+}
+
 int s_create_settings(scenne_entity_t *scene,
         __attribute__((unused)) window_controler_t *manager)
 {
