@@ -26,25 +26,38 @@ static int update(scenne_entity_t *curr, window_controler_t *manager)
     return (ret_code);
 }
 
+static int game_loop(window_controler_t *manager, sfClock *clock)
+{
+    scenne_entity_t *curr;
+    int ret_code = 0;
+
+    if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) < 1.0 / 120.0)
+        return (0);
+    sfRenderWindow_clear(manager->win, sfBlack);
+    curr = get_current_scenne_entity(manager);
+    if (curr == NULL)
+        ret_code = 84;
+    else
+        ret_code = update(curr, manager);
+    while (sfRenderWindow_pollEvent(manager->win, &manager->event))
+        check_need_close(manager);
+    sfClock_restart(clock);
+    return (ret_code);
+}
+
 int game_controller(window_controler_t *manager)
 {
     int ret_code = 0;
-    scenne_entity_t *curr;
+    sfClock *clock = sfClock_create();
 
+    if (!clock)
+        return (84);
     while (ret_code == 0 && sfRenderWindow_isOpen(manager->win)) {
-        sfRenderWindow_clear(manager->win, sfBlack);
-        curr = get_current_scenne_entity(manager);
-        if (curr == NULL) {
-            sfRenderWindow_close(manager->win);
-            ret_code = 84;
-        } else {
-            ret_code = update(curr, manager);
-        }
-        while (sfRenderWindow_pollEvent(manager->win, &manager->event))
-            check_need_close(manager);
+        game_loop(manager, clock);
         sfRenderWindow_display(manager->win);
     }
     if (ret_code != 0 && sfRenderWindow_isOpen(manager->win))
         sfRenderWindow_close(manager->win);
+    sfClock_destroy(clock);
     return (ret_code);
 }
