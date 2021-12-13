@@ -1,10 +1,10 @@
-
-
-
-
-                                                      s
-                                     bbbbbbbbbbbbbbbbbb
-                             bbbbbbbbbbbbbbbbb
-           bsb        bbbbbbbbbbbbbbbbbb
+                                                                             f
+                                                                             f
+                                                                             f
+                                                                             f
+                                                      s                      f
+                                     bbbbbbbbbbbbbbbbbb                      f
+                             bbbbbbbbbbbbbsbbb                               f
+           bsb        bbbbbbbbbbbbbsbbbb                                     f
 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb

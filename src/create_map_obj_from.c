@@ -16,17 +16,25 @@ static void process_data(game_runner_t *data, scenne_entity_t *scene, char c,
     object_entity_t *obj;
     char const *tmp;
 
+    if (c != 'b' && c != 's' && c != 'f')
+        return;
     if (c == 'b')
         tmp = data->block;
-    else if (c == 's')
+    if (c == 's')
         tmp = data->spike;
-    else
-        return;
+    if (c == 'f')
+        tmp = data->end;
     pos.x *= 53;
     pos.y *= 60;
     create_picture(scene, tmp, pos, o_update_game_block);
     for (obj = scene->objects; obj->next != NULL; obj = obj->next);
     obj->data = (c == 's') ? (void *) 1 : NULL;
+    if (c == 's')
+        obj->data = (void *) 1;
+    else if (c == 'f')
+        obj->data = (void *) 2;
+    else
+        obj->data = NULL;
 }
 
 int create_map_obj_from(game_runner_t *data, scenne_entity_t *scene)
