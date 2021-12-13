@@ -80,7 +80,8 @@ struct window_controler {
 int create_music(scenne_entity_t *, char const *, int,
         int (*)(object_entity_t *, scenne_entity_t *, window_controler_t *));
 
-/* destroy_music
+/*
+** destroy_music
 ** destroy a music object
 ** scenne_entity_t *: the scene that have the object
 ** object_entity_t *: the music to destroy
