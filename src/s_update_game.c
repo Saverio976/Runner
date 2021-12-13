@@ -8,28 +8,23 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
-static int check_point_in(float px, float py, sfFloatRect *rect)
-{
-    if (rect->left <= px && px <= rect->left + rect->width &&
-            rect->top <= py && py <= rect->top + rect->height)
-        return (1);
-    return (0);
-}
-
 static int colision_between(game_player_t *player,
-        __attribute((unused)) object_entity_t *obj, sfFloatRect *bounds,
-        sfFloatRect *pl_bounds)
+        object_entity_t *obj, window_controler_t *manager)
 {
     int passed = 0;
+    sfFloatRect pl_bounds = sfSprite_getGlobalBounds(player->sprite);
+    sfFloatRect bounds = sfSprite_getGlobalBounds(obj->sprite);
 
+    if (obj->data != NULL)
+        return (pass_game_to_menu(manager));
     player->buffer_gravity = 0;
     while (player->on_ground == 0 &&
-            (check_point_in(bounds->left + bounds->width, bounds->top,
-                pl_bounds) ||
-            check_point_in(bounds->left, bounds->top, pl_bounds))) {
+            (check_point_in(bounds.left + bounds.width, bounds.top,
+                &pl_bounds) ||
+            check_point_in(bounds.left, bounds.top, &pl_bounds))) {
         passed = 1;
         player->pos.y -= 1;
-        pl_bounds->top -= 1;
+        pl_bounds.top -= 1;
         sfSprite_setPosition(player->sprite, player->pos);
     }
     player->pos.y += 1;
@@ -38,19 +33,17 @@ static int colision_between(game_player_t *player,
     return (1);
 }
 
-static int update_pos_player(game_player_t *player, object_entity_t *objs)
+static int update_pos_player(game_player_t *player, object_entity_t *objs,
+        window_controler_t *manager)
 {
     sfFloatRect bounds;
     sfFloatRect pl_bounds = sfSprite_getGlobalBounds(player->sprite);
     int game_continue = 1;
 
-    for (objs = objs->next; game_continue && objs != NULL; objs = objs->next) {
-        if (objs->type != SPRITE) {
+    for (objs = objs; game_continue && objs != NULL; objs = objs->next) {
+        if (objs->type != SPRITE)
             continue;
-        }
         bounds = sfSprite_getGlobalBounds(objs->sprite);
-        if (bounds.width == 800)
-            continue;
         if (check_point_in(bounds.left, bounds.top, &pl_bounds) ||
                 check_point_in(bounds.left + bounds.width,
                     bounds.top + bounds.height, &pl_bounds) ||
@@ -58,7 +51,7 @@ static int update_pos_player(game_player_t *player, object_entity_t *objs)
                     &pl_bounds) ||
                 check_point_in(bounds.left + bounds.width, bounds.top,
                     &pl_bounds))
-            game_continue = colision_between(player, objs, &bounds, &pl_bounds);
+            game_continue = colision_between(player, objs, manager);
     }
     return (game_continue);
 }
@@ -66,14 +59,31 @@ static int update_pos_player(game_player_t *player, object_entity_t *objs)
 static void check_loose_player(window_controler_t *manager,
         game_player_t *player, object_entity_t *bg)
 {
-    sfFloatRect bounds_bg = sfSprite_getGlobalBounds(bg->sprite);
+    sfFloatRect bounds_bg;
     sfFloatRect bounds_pl = sfSprite_getGlobalBounds(player->sprite);
 
+    if (bg->type != SPRITE)
+        return;
+    bounds_bg = sfSprite_getGlobalBounds(bg->sprite);
     if (!check_point_in(bounds_pl.left, bounds_pl.top, &bounds_bg) ||
             !check_point_in(bounds_pl.left, bounds_pl.top + bounds_pl.height,
                 &bounds_bg)) {
-        manager->current_zindex = 1;
+        pass_game_to_menu(manager);
     }
+}
+
+static void update_gravity(game_player_t *player)
+{
+    if (sfTime_asSeconds(sfClock_getElapsedTime(player->clock)) < 1.0 / 20.0)
+        return;
+    if (sfKeyboard_isKeyPressed(sfKeySpace) && player->on_ground == 1) {
+        player->buffer_gravity -= player->gravity * 5;
+        player->pos.y -= 5;
+        player->on_ground = 0;
+        sfSprite_setPosition(player->sprite, player->pos);
+    }
+    player->buffer_gravity += player->gravity;
+    sfClock_restart(player->clock);
 }
 
 int s_update_game(scenne_entity_t *scene,
@@ -82,13 +92,8 @@ int s_update_game(scenne_entity_t *scene,
     game_player_t *player = (game_player_t *) scene->data;
     object_entity_t *objs = scene->objects;
 
-    if (sfKeyboard_isKeyPressed(sfKeySpace) && player->on_ground == 1) {
-        player->buffer_gravity -= player->gravity * 8;
-        player->pos.y -= 10;
-        player->on_ground = 0;
-    }
-    player->buffer_gravity += player->gravity;
-    if (!update_pos_player(player, objs)) {
+    update_gravity(player);
+    if (!update_pos_player(player, objs, manager)) {
         manager->current_zindex = 1;
         return (0);
     }

@@ -23,21 +23,42 @@ static int create_scene_data(game_player_t *player, game_runner_t *data)
     player->gravity = 5;
     player->buffer_gravity = 0;
     player->on_ground = 0;
+    player->clock = sfClock_create();
+    if (!player->clock)
+        return (0);
     sfSprite_setScale(player->sprite, (sfVector2f) {0.5, 0.5});
+    return (1);
+}
+
+int restart_game(scenne_entity_t *scene,
+        window_controler_t *manager)
+{
+    sfVector2f pos_bg = {0, 0};
+    sfVector2f pos_txt = {10, 10};
+    sfVector2f pos_paralax2 = {0, 50};
+    game_runner_t *data = (game_runner_t *) manager->data;
+    game_player_t *player = (game_player_t *) scene->data;
+
+    create_picture(scene, data->bg_game, pos_bg,
+            o_update_game_background);
+    create_picture(scene, PARALAX_2_PATH, pos_paralax2,
+            o_update_game_paralax_2);
+    scene->objects->data = NULL;
+    create_map_obj_from(manager->data, scene);
+    sfClock_restart(scene->clock);
+    player->pos = (sfVector2f) {20, 300};
+    player->buffer_gravity = 0;
+    player->on_ground = 0;
+    sfSprite_setPosition(player->sprite, player->pos);
+    create_text(scene, FONT_PATH, pos_txt, o_update_game_time);
     return (1);
 }
 
 int s_create_game(scenne_entity_t *scene,
         window_controler_t *manager)
 {
-    sfVector2f pos_bg = {0, 0};
-    sfVector2f pos_txt = {10, 10};
     game_runner_t *data = (game_runner_t *) manager->data;
 
-    create_picture(scene, data->bg_game, pos_bg,
-            o_update_game_background);
-    create_map_obj_from(data, scene);
-    create_text(scene, FONT_PATH, pos_txt, o_update_game_time);
     scene->clock = sfClock_create();
     if (!scene->clock)
         return (0);
