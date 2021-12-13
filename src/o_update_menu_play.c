@@ -22,7 +22,7 @@ int o_update_menu_play(object_entity_t *obj,
         sfSprite_setScale(obj->sprite, scale);
         if (sfMouse_isButtonPressed(sfMouseLeft)) {
             manager->current_zindex = 3;
-            sfClock_restart(scene->next->next->clock);
+            restart_game(scene->next->next, manager);
         }
     } else {
         sfSprite_setScale(obj->sprite, normal);
