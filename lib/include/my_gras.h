@@ -11,8 +11,8 @@
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
 
-typedef struct window_controler window_controler_t;
-typedef struct scenne_entity scenne_entity_t;
+typedef struct window_controller window_controller_t;
+typedef struct scene_entity scene_entity_t;
 typedef struct object_entity object_entity_t;
 
 enum object_entity_type {
@@ -34,32 +34,32 @@ struct object_entity {
     int object_is_visible;
     int music_is_looping;
     int music_is_playing;
-    int (*update)(object_entity_t *, scenne_entity_t *, window_controler_t *);
+    int (*update)(object_entity_t *, scene_entity_t *, window_controller_t *);
     object_entity_t *next;
     void *data;
 };
 
-struct scenne_entity {
+struct scene_entity {
     int zindex;
-    struct scenne_entity *next;
-    int (*create)(scenne_entity_t *, window_controler_t *);
-    int (*update)(scenne_entity_t *, window_controler_t *);
-    void (*destroy)(scenne_entity_t *, window_controler_t *);
+    struct scene_entity *next;
+    int (*create)(scene_entity_t *, window_controller_t *);
+    int (*update)(scene_entity_t *, window_controller_t *);
+    void (*destroy)(scene_entity_t *, window_controller_t *);
     sfRenderWindow *win;
     sfClock *clock;
     object_entity_t *objects;
     void *data;
 };
 
-struct window_controler {
+struct window_controller {
     int current_zindex;
-    scenne_entity_t *scennes;
+    scene_entity_t *scenes;
     sfRenderWindow *win;
     sfEvent event;
     sfClock *clock;
     void *data;
-    int (*create)(window_controler_t *);
-    void (*destroy)(window_controler_t *);
+    int (*create)(window_controller_t *);
+    void (*destroy)(window_controller_t *);
 };
 
 // ****************************************************************************
@@ -72,21 +72,21 @@ struct window_controler {
 /*
 ** create_music
 ** create a music object
-** scenne_entity_t *: the scene to attatch the object
+** scene_entity_t *: the scene to attatch the object
 ** char const *: path to the music
 ** int: music need to be playing now ?
 ** void (*)(..): the update funtion to call at each frame
 */
-int create_music(scenne_entity_t *, char const *, int,
-        int (*)(object_entity_t *, scenne_entity_t *, window_controler_t *));
+int create_music(scene_entity_t *, char const *, int,
+        int (*)(object_entity_t *, scene_entity_t *, window_controller_t *));
 
 /*
 ** destroy_music
 ** destroy a music object
-** scenne_entity_t *: the scene that have the object
+** scene_entity_t *: the scene that have the object
 ** object_entity_t *: the music to destroy
 */
-int destroy_music(scenne_entity_t *, object_entity_t *);
+int destroy_music(scene_entity_t *, object_entity_t *);
 
 // ***********************************
 // PICTURE / SPRITE
@@ -94,20 +94,20 @@ int destroy_music(scenne_entity_t *, object_entity_t *);
 /*
 ** create_picture
 ** create a picture object
-** scenne_entity_t *: the scene to attatch the object
+** scene_entity_t *: the scene to attatch the object
 ** char const *: path to the texture img
 ** sfVector2i: the position of this sprite
 ** void (*)(..): the update funtion to call at each frame
 */
-int create_picture(scenne_entity_t *, char const *, sfVector2f,
-        int (*)(object_entity_t *, scenne_entity_t *, window_controler_t *));
+int create_picture(scene_entity_t *, char const *, sfVector2f,
+        int (*)(object_entity_t *, scene_entity_t *, window_controller_t *));
 
 /* destroy_picture
 ** destroy a sprite object
-** scenne_entity_t *: the scene that have the object
+** scene_entity_t *: the scene that have the object
 ** object_entity_t *: the music to destroy
 */
-int destroy_picture(scenne_entity_t *, object_entity_t *);
+int destroy_picture(scene_entity_t *, object_entity_t *);
 
 // ***********************************
 // TEXT
@@ -115,63 +115,63 @@ int destroy_picture(scenne_entity_t *, object_entity_t *);
 /*
 ** create_text
 ** create a text object
-** scenne_entity_t *: the scenne to attach the object
+** scene_entity_t *: the scene to attach the object
 ** char const *path: the path of the font
 ** sfVector2f: position of the text
 ** void (*)(..): the update function call each frame
 */
-int create_text(scenne_entity_t *, char const *, sfVector2f,
-        int (*)(object_entity_t *, scenne_entity_t *, window_controler_t *));
+int create_text(scene_entity_t *, char const *, sfVector2f,
+        int (*)(object_entity_t *, scene_entity_t *, window_controller_t *));
 
 /*
 ** destroy_text
 ** destroy a text object
-** scenne_entity_t *: the scenne to destroy the object
+** scene_entity_t *: the scene to destroy the object
 ** object_entity_t *: the obj to destroy
 */
-int destroy_text(scenne_entity_t *, object_entity_t *);
+int destroy_text(scene_entity_t *, object_entity_t *);
 
 // ****************************************************************************
-// SCENNE_ENTITY_T
+// scene_ENTITY_T
 // ****************************************************************************
 
 /*
-** create_scenne
-** create a scenne in a window controler
-** window_controler_t *: the main window
-** int (*)(..): the function called to create the scenne
+** create_scene
+** create a scene in a window controller
+** window_controller_t *: the main window
+** int (*)(..): the function called to create the scene
 ** void (*)(..): the function called at each frame
 ** void (*)(..): the function called at the end
 */
-int create_scenne(window_controler_t *,
-        int (*)(scenne_entity_t *, window_controler_t *),
-        int (*)(scenne_entity_t *, window_controler_t *),
-        void (*)(scenne_entity_t *, window_controler_t *));
+int create_scene(window_controller_t *,
+        int (*)(scene_entity_t *, window_controller_t *),
+        int (*)(scene_entity_t *, window_controller_t *),
+        void (*)(scene_entity_t *, window_controller_t *));
 
 /*
-** destroy_all_scenne_obj
+** destroy_all_scene_obj
 ** destroy all scene obj of a scene
-** scenne_entity_t *: the scene
+** scene_entity_t *: the scene
 */
-void destroy_all_scenne_obj(scenne_entity_t *);
+void destroy_all_scene_obj(scene_entity_t *);
 
 /*
-** destroy_scenne
-** destroy a scenne entity in a window controler
-** window_controler_t *: the window controler
-** scenne_entity_t *: the scenne to destroy
+** destroy_scene
+** destroy a scene entity in a window controller
+** window_controller_t *: the window controller
+** scene_entity_t *: the scene to destroy
 */
-void destroy_scenne(window_controler_t *, scenne_entity_t *);
+void destroy_scene(window_controller_t *, scene_entity_t *);
 
 /*
-** get_current_scenne_entity
+** get_current_scene_entity
 ** get the current scene
-** window_controler_t *: the window controler
+** window_controller_t *: the window controller
 */
-scenne_entity_t *get_current_scenne_entity(window_controler_t *);
+scene_entity_t *get_current_scene_entity(window_controller_t *);
 
 // ****************************************************************************
-// WINDOW_CONTROLER_T
+// WINDOW_controller_T
 // ****************************************************************************
 
 /*
@@ -180,21 +180,21 @@ scenne_entity_t *get_current_scenne_entity(window_controler_t *);
 ** int (*)(..): function executed before window start
 ** void (*)(..): function executed at the end
 */
-window_controler_t *create(int (*)(window_controler_t *),
-        void (*)(window_controler_t *));
+window_controller_t *create(int (*)(window_controller_t *),
+        void (*)(window_controller_t *));
 
 /*
 ** start
-** start the game/scennes
-** window_controler_t *: the window created by create()
+** start the game/scenes
+** window_controller_t *: the window created by create()
 ** char const *: the window title
 ** sfVideoMode: width, height bpp (see csfml doc for more details)
 ** sfUint32: style of teh window (sfResize / sfFulScreen ..)
 */
-int start(window_controler_t *, char const *, sfVideoMode,
+int start(window_controller_t *, char const *, sfVideoMode,
         sfUint32);
 
 // dont use it
-int game_controller(window_controler_t *);
+int game_controller(window_controller_t *);
 
 #endif
