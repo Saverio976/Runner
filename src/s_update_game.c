@@ -27,7 +27,7 @@ static int colision_between(game_player_t *player,
         pl_bounds.top -= 1;
         sfSprite_setPosition(player->sprite, player->pos);
     }
-    player->pos.y += 1;
+    player->pos.y += 2;
     sfSprite_setPosition(player->sprite, player->pos);
     player->on_ground = passed;
     return (1);

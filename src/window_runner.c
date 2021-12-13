@@ -24,6 +24,7 @@ static void create_data(game_runner_t *data)
     data->spike = "assets/spike.png";
     data->map_txt = "map/basic.txt";
     data->player = "assets/cubes_1.png";
+    data->end = "assets/end_block.png";
 }
 
 int w_create_runner(window_controler_t *manager)

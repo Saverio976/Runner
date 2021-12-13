@@ -34,6 +34,7 @@ struct game_runner {
     char const *block;
     char const *spike;
     char const *player;
+    char const *end;
 };
 
 struct game_player {
