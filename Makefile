@@ -45,29 +45,34 @@ FN_TEST_FLAGS	=	-ftest-coverage -fprofile-arcs
 # ----------------------------------------------------------------------------
 
 $(OBJDIR)%.o: %.c
-	$(CC)     $(CFLAGS)    $^ -c -o $@
+	@$(CC)     $(CFLAGS)    $^ -c -o $@
+	@echo -e '\033[0;36m$^ -> $@\033[0m'
 
 .PHONY: all
 all:	$(LIB_TARGET) $(TARGET) ## Build lib+binary
 
-$(TARGET):	$(OBJ) $(MAIN_OBJ) ## Build the binary
-	$(MAKE) -C $(SRCDIR)
-	$(CC) $(OBJ) $(SRCDIR)obj/*.o $(MAIN_OBJ) -o $(TARGET) $(LFLAGS) $(CFLAGS)
+$(TARGET):	obj_scenes $(OBJ) $(MAIN_OBJ) ## Build the binary
+	@$(CC) $(OBJ) $(SRCDIR)obj/*.o $(MAIN_OBJ) -o $(TARGET) $(LFLAGS) $(CFLAGS)
+	@echo -e '\033[0;32mdone : $(TARGET)\033[0m'
+
+obj_scenes:
+	@$(MAKE) -C $(SRCDIR)
 
 $(LIB_TARGET): ## Build the lib
 	$(MAKE) -C lib/
 
 .PHONY: clean
 clean: ## Clean obj and gcno/gcda
-	$(MAKE) -C $(SRCDIR) clean
-	rm -f $(OBJDIR)*.o
-	rm -f vgcore.*
-	rm -f **/*.gcno **/*.gcda
+	@$(MAKE) -C $(SRCDIR) clean
+	@rm -f $(OBJDIR)*.o
+	@rm -f vgcore.*
+	@rm -f **/*.gcno **/*.gcda
 
 .PHONY: fclean
 fclean:	clean ## Clean+Remove target/target_test and call lib fclean
-	$(MAKE) -C lib/ fclean -s
-	rm -f $(TARGET) $(TARGET_TEST)
+	@$(MAKE) -C lib/ fclean -s
+	@rm -f $(TARGET) $(TARGET_TEST)
+	@echo -e '\033[0;32mdone : fclean\033[0m'
 
 .PHONY: re
 re:	fclean all ## Fclean+All

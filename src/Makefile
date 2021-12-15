@@ -37,16 +37,18 @@ CFLAGS		+= 	-I../include/ -I../lib/include/ $(WFLAGS)
 # ----------------------------------------------------------------------------
 
 $(OBJDIR)%.o: %.c
-	$(CC)    $(CFLAGS)    $^ -c -o $(OBJDIR)$(notdir $@)
+	@$(CC)    $(CFLAGS)    $^ -c -o $(OBJDIR)$(notdir $@)
+	@echo -e '\033[0;36m$(notdir $^) -> $(notdir $@)\033[0m'
 
 .PHONY: all
 all: $(OBJ)
+	@echo -e '\033[0;32mdone : scenes\033[0m'
 
 .PHONY: clean
 clean: ## Clean obj and gcno/gcda
-	rm -f $(OBJDIR)*.o
-	rm -f vgcore.*
-	rm -f **/*.gcno **/*.gcda
+	@rm -f $(OBJDIR)*.o
+	@rm -f vgcore.*
+	@rm -f **/*.gcno **/*.gcda
 
 .PHONY: re
-re:	fclean all ## Fclean+All
+re:	clean all ## Fclean+All

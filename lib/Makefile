@@ -9,13 +9,11 @@ TARGET		=	libmy.a
 
 SRCGRAS		=	src/libgras/
 
-SRCMY		=	src/libmy/
-
 OBJDIR		=	obj/
 
 VPATH		=	$(SRCGRAS) $(SRCMY) $(OBJDIR) include/
 
-SRC		=	$(wildcard $(SRCGRAS)*.c) $(wildcard $(SRCMY)*.c)
+SRC		=	$(wildcard $(SRCGRAS)*.c)
 
 OBJ		:=	$(SRC:%.c=%.o)
 OBJ		:=	$(addprefix $(OBJDIR), $(notdir $(OBJ)))
@@ -25,21 +23,23 @@ CFLAGS		=	-Iinclude -Wall -Wextra -Wpedantic
 # ----------------------------------------------------------------------------
 
 $(OBJDIR)%.o: %.c
-	$(CC)     $(CFLAGS)     $^ -c -o $@
+	@$(CC)     $(CFLAGS)     $^ -c -o $@
+	@echo -e '\033[0;36m$(notdir $^) -> $(notdir $@)\033[0m'
 
 .PHONY: all
 all:	$(TARGET) ## Call $(TARGET)
 
 $(TARGET):	$(OBJ) ## Build the lib
-	ar rc $(TARGET) $(OBJ)
+	@ar rc $(TARGET) $(OBJ)
+	@echo -e '\033[0;32mdone : $(TARGET)\033[0m'
 
 .PHONY: clean
 clean: ## Clean obj/*.o
-	rm -f $(OBJDIR)*.o
+	@rm -f $(OBJDIR)*.o
 
 .PHONY: fclean
 fclean:	clean ## Clean the binary
-	rm -f $(TARGET)
+	@rm -f $(TARGET)
 
 .PHONY: re
 re:	fclean all ## Fclean+All
