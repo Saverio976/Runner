@@ -32,21 +32,34 @@ static int create_scene_data(game_player_t *player, game_runner_t *data)
     return (1);
 }
 
+
+int restart_game_two(scene_entity_t *scene, game_runner_t *data)
+{
+    sfVector2f pos_bg = {0, 0};
+    sfVector2f pos_paralax2 = {0, 0};
+    sfVector2f pos_paralax3 = {0, 0};
+
+    if (create_picture(scene, data->settings.background_img, pos_bg,
+            o_update_game_background) != 1)
+        return (0);
+    if (create_picture(scene, PARALAX_3_PATH, pos_paralax3,
+            draw_paralax_3) != 1)
+        return (0);
+    if (create_picture(scene, PARALAX_2_PATH, pos_paralax2,
+            o_update_game_paralax_2) != 1)
+        return (0);
+    return (1);
+}
+
 int restart_game(scene_entity_t *scene,
         window_controller_t *manager)
 {
-    sfVector2f pos_bg = {0, 0};
     sfVector2f pos_txt = {10, 10};
-    sfVector2f pos_paralax2 = {0, 50};
     game_runner_t *data = (game_runner_t *) manager->data;
     game_player_t *player = (game_player_t *) scene->data;
 
-    create_picture(scene, data->settings.background_img, pos_bg,
-            o_update_game_background);
-    scene->objects->data = NULL;
-    create_picture(scene, PARALAX_2_PATH, pos_paralax2,
-            o_update_game_paralax_2);
-    scene->objects->next->data = NULL;
+    if (restart_game_two(scene, data) != 1)
+        return (0);
     create_map_obj_from(manager->data, scene);
     sfClock_restart(scene->clock);
     player->pos = (sfVector2f) {20, 300};

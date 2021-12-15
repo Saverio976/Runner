@@ -8,7 +8,7 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
-int o_update_game_background(object_entity_t *obj,
+int draw_paralax_3(object_entity_t *obj,
         __attribute__((unused)) scene_entity_t *scene,
         window_controller_t *manager)
 {
@@ -18,7 +18,7 @@ int o_update_game_background(object_entity_t *obj,
 
     if (bounds.left + bounds.width < 0)
         obj->pos.x += bounds.width;
-    obj->pos.x -= data->settings.speed_paralax_4;
+    obj->pos.x -= data->settings.speed_paralax_3;
     sfSprite_setPosition(obj->sprite, obj->pos);
     sfRenderWindow_drawSprite(manager->win, obj->sprite, NULL);
     tmp = obj->pos.x;
