@@ -12,17 +12,17 @@
 
 // MACRO
 
-    #define INTRO_BG_PATH "assets/background_intro.png"
-    #define MENU_MUSIC_PATH "assets/forever_bound_stereo_madness.ogg"
-    #define FONT_PATH "assets/fonts.otf"
-    #define DEFAULT_BG_IMG "assets/blue_bg.jpg"
-    #define PLAY_BUTTON_PATH "assets/play.png"
-    #define PARALAX_2_PATH "assets/paralax_2.png"
-    #define DEFAULT_BLOCK_IMG "assets/block.png"
-    #define DEFAULT_SPIKE_IMG "assets/spike.png"
+    #define INTRO_BG_PATH "assets/background/intro.png"
+    #define MENU_MUSIC_PATH "assets/music/forever_bound_stereo_madness.ogg"
+    #define FONT_PATH "assets/fonts/fonts.otf"
+    #define DEFAULT_BG_IMG "assets/background/blue.jpg"
+    #define PLAY_BUTTON_PATH "assets/buttons/play.png"
+    #define PARALAX_2_PATH "assets/background/paralax_2.png"
+    #define DEFAULT_BLOCK_IMG "assets/ground/block.png"
+    #define DEFAULT_SPIKE_IMG "assets/spikes/spike.png"
     #define DEFAULT_MAP_PATH "map/42.txt"
-    #define DEFAULT_PLAYER_IMG "assets/cubes_1.png"
-    #define DEFAULT_END_IMG "assets/end_block.png"
+    #define DEFAULT_PLAYER_IMG "assets/player/cubes_1.png"
+    #define DEFAULT_END_IMG "assets/end_block/end_block.png"
 
 typedef struct game_runner game_runner_t;
 typedef struct game_player game_player_t;
