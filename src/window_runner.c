@@ -14,8 +14,9 @@ static void create_data(game_runner_t *data)
     data->is_playing = 1;
     data->settings.global_sound = 1;
     data->settings.speed_paralax_1 = 10;
-    data->settings.speed_paralax_2 = 5;
-    data->settings.speed_paralax_3 = 2;
+    data->settings.speed_paralax_2 = 7;
+    data->settings.speed_paralax_3 = 5;
+    data->settings.speed_paralax_4 = 2;
     data->settings.background_img = DEFAULT_BG_IMG;
     data->settings.block_img = DEFAULT_BLOCK_IMG;
     data->settings.spike_img = DEFAULT_SPIKE_IMG;
