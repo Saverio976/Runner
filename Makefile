@@ -33,7 +33,7 @@ TEST_SRC	= 	$(wildcard tests/*.c)
 TEST_OBJ	:=	$(TEST_SRC:%.c=%.o)
 TEST_OBJ	:=	$(addprefix $(OBJDIR), $(notdir $(TEST_OBJ)))
 
-CFLAGS		= 	-g3 -Iinclude/ -Ilib/include/ -Wall -Wextra -Wpedantic
+CFLAGS		= 	-Iinclude/ -Ilib/include/ -Wall -Wextra -Wpedantic
 
 LFLAGS		=	-Llib/ -lmy -lcsfml-graphics -lcsfml-system \
 			-lcsfml-audio -lcsfml-window

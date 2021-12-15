@@ -30,7 +30,7 @@ VPATH		=	$(SRCDIR) $(OBJDIR)
 OBJ		:=	$(SRC:%.c=%.o)
 OBJ		:=	$(addprefix $(OBJDIR), $(OBJ))
 
-WFLAGS		:=	-g3 -Wall -Wextra -Wpedantic
+WFLAGS		:=	-Wall -Wextra -Wpedantic
 
 CFLAGS		+= 	-I../include/ -I../lib/include/ $(WFLAGS)
 
