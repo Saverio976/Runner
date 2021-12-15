@@ -9,22 +9,20 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
-static const char *BG_PATHS[4] = {"assets/blue_bg.jpg", "assets/green_bg.png",
-    "assets/purple_bg.jpg", "assets/red_bg.png"};
-
 static void create_data(game_runner_t *data)
 {
     data->is_playing = 1;
-    data->global_sound = 1;
-    data->speed_paralax_1 = 10;
-    data->speed_paralax_2 = 5;
-    data->speed_paralax_3 = 2;
-    data->bg_game = BG_PATHS[0];
-    data->block = "assets/block.png";
-    data->spike = "assets/spike.png";
-    data->map_txt = "map/basic.txt";
-    data->player = "assets/cubes_1.png";
-    data->end = "assets/end_block.png";
+    data->settings.global_sound = 1;
+    data->settings.speed_paralax_1 = 10;
+    data->settings.speed_paralax_2 = 5;
+    data->settings.speed_paralax_3 = 2;
+    data->settings.background_img = DEFAULT_BG_IMG;
+    data->settings.block_img = DEFAULT_BLOCK_IMG;
+    data->settings.spike_img = DEFAULT_SPIKE_IMG;
+    data->settings.map_path = DEFAULT_MAP_PATH;
+    data->settings.player_img = DEFAULT_PLAYER_IMG;
+    data->settings.end_img = DEFAULT_END_IMG;
+    data->is_win = -1;
 }
 
 int w_create_runner(window_controller_t *manager)

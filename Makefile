@@ -17,9 +17,7 @@ OBJDIR		=	obj/
 
 VPATH		=	$(SRCDIR) $(OBJDIR) lib/ include/ tests/
 
-SRC		:=	$(wildcard $(SRCDIR)*.c) \
-			$(wildcard $(SRCDIR)intro/*.c) \
-			$(wildcard $(SRCDIR)intro/background/*.c)
+SRC		:=	$(wildcard $(SRCDIR)*.c)
 SRC		:=	$(filter-out $(SRCDIR)main.c, $(SRC))
 
 OBJ		:=	$(SRC:%.c=%.o)
@@ -35,7 +33,7 @@ TEST_SRC	= 	$(wildcard tests/*.c)
 TEST_OBJ	:=	$(TEST_SRC:%.c=%.o)
 TEST_OBJ	:=	$(addprefix $(OBJDIR), $(notdir $(TEST_OBJ)))
 
-CFLAGS		= 	-Iinclude/ -Ilib/include/ -Wall -Wextra -Wpedantic
+CFLAGS		= 	-g3 -Iinclude/ -Ilib/include/ -Wall -Wextra -Wpedantic
 
 LFLAGS		=	-Llib/ -lmy -lcsfml-graphics -lcsfml-system \
 			-lcsfml-audio -lcsfml-window
@@ -53,13 +51,15 @@ $(OBJDIR)%.o: %.c
 all:	$(LIB_TARGET) $(TARGET) ## Build lib+binary
 
 $(TARGET):	$(OBJ) $(MAIN_OBJ) ## Build the binary
-	$(CC) $(OBJ) $(MAIN_OBJ) -o $(TARGET) $(LFLAGS) $(CFLAGS)
+	$(MAKE) -C $(SRCDIR)
+	$(CC) $(OBJ) $(SRCDIR)obj/*.o $(MAIN_OBJ) -o $(TARGET) $(LFLAGS) $(CFLAGS)
 
 $(LIB_TARGET): ## Build the lib
 	$(MAKE) -C lib/
 
 .PHONY: clean
 clean: ## Clean obj and gcno/gcda
+	$(MAKE) -C $(SRCDIR) clean
 	rm -f $(OBJDIR)*.o
 	rm -f vgcore.*
 	rm -f **/*.gcno **/*.gcda

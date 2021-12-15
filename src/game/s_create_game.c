@@ -11,7 +11,9 @@
 
 static int create_scene_data(game_player_t *player, game_runner_t *data)
 {
-    player->texture = sfTexture_createFromFile(data->player, NULL);
+    sfVector2f scale = {0.5, 0.5};
+
+    player->texture = sfTexture_createFromFile(data->settings.player_img, NULL);
     if (!player->texture)
         return (0);
     player->sprite = sfSprite_create();
@@ -26,7 +28,7 @@ static int create_scene_data(game_player_t *player, game_runner_t *data)
     player->clock = sfClock_create();
     if (!player->clock)
         return (0);
-    sfSprite_setScale(player->sprite, (sfVector2f) {0.5, 0.5});
+    sfSprite_setScale(player->sprite, scale);
     return (1);
 }
 
@@ -39,11 +41,12 @@ int restart_game(scene_entity_t *scene,
     game_runner_t *data = (game_runner_t *) manager->data;
     game_player_t *player = (game_player_t *) scene->data;
 
-    create_picture(scene, data->bg_game, pos_bg,
+    create_picture(scene, data->settings.background_img, pos_bg,
             o_update_game_background);
+    scene->objects->data = NULL;
     create_picture(scene, PARALAX_2_PATH, pos_paralax2,
             o_update_game_paralax_2);
-    scene->objects->data = NULL;
+    scene->objects->next->data = NULL;
     create_map_obj_from(manager->data, scene);
     sfClock_restart(scene->clock);
     player->pos = (sfVector2f) {20, 300};

@@ -12,12 +12,12 @@ static void update_music_settings(game_runner_t *data, scene_entity_t *scene)
 {
     if (sfTime_asSeconds(sfClock_getElapsedTime(scene->clock)) < 0.2)
         return;
-    data->global_sound = !data->global_sound;
-    if (!data->global_sound && data->is_playing) {
+    data->settings.global_sound = !data->settings.global_sound;
+    if (!data->settings.global_sound && data->is_playing) {
         sfMusic_pause(data->music);
         data->is_playing = 0;
     }
-    if (data->global_sound && !data->is_playing) {
+    if (data->settings.global_sound && !data->is_playing) {
         sfMusic_play(data->music);
         data->is_playing = 1;
     }

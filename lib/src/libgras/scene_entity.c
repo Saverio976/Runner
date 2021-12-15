@@ -58,16 +58,23 @@ void destroy_all_scene_obj(scene_entity_t *scene)
     object_entity_t *curr = scene->objects;
     object_entity_t *tmp;
 
-    while (curr != NULL) {
+    for (; curr != NULL; curr = tmp) {
         tmp = curr->next;
-        if (curr->type == MUSIC)
-            destroy_music(scene, curr);
-        if (curr->type == TEXT)
-            destroy_text(scene, curr);
-        if (curr->type == SPRITE)
-            destroy_picture(scene, curr);
-        curr = tmp;
+        switch (curr->type) {
+            case SPRITE:
+                destroy_picture(scene, curr);
+                break;
+            case MUSIC:
+                destroy_music(scene, curr);
+                break;
+            case TEXT:
+                destroy_text(scene, curr);
+                break;
+            default:
+                break;
+        }
     }
+    scene->objects = NULL;
 }
 
 void destroy_scene(window_controller_t *manager, scene_entity_t *scene)

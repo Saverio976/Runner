@@ -8,18 +8,17 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
-int o_update_game_paralax_2(object_entity_t *obj,
+int o_update_game_background(object_entity_t *obj,
         __attribute__((unused)) scene_entity_t *scene,
         window_controller_t *manager)
 {
-    game_runner_t *data = manager->data;
-    sfFloatRect bounds = sfSprite_getGlobalBounds(obj->sprite);
     float tmp;
+    game_runner_t *data = (game_runner_t *) manager->data;
+    sfFloatRect bounds = sfSprite_getGlobalBounds(obj->sprite);
 
-    obj->pos.x -= data->speed_paralax_2;
-    if (bounds.left + bounds.width - 10 < 0) {
+    if (bounds.left + bounds.width < 0)
         obj->pos.x += bounds.width;
-    }
+    obj->pos.x -= data->settings.speed_paralax_3;
     sfSprite_setPosition(obj->sprite, obj->pos);
     sfRenderWindow_drawSprite(manager->win, obj->sprite, NULL);
     tmp = obj->pos.x;

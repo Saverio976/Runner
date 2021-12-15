@@ -20,7 +20,7 @@ SRC		=	$(wildcard $(SRCGRAS)*.c) $(wildcard $(SRCMY)*.c)
 OBJ		:=	$(SRC:%.c=%.o)
 OBJ		:=	$(addprefix $(OBJDIR), $(notdir $(OBJ)))
 
-CFLAGS		=	-Iinclude -Wall -Wextra -Wpedantic
+CFLAGS		=	-g3 -Iinclude -Wall -Wextra -Wpedantic
 
 # ----------------------------------------------------------------------------
 

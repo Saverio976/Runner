@@ -61,7 +61,6 @@ int create_picture(scene_entity_t *scene, char const *path,
         return (0);
     if (cursor == NULL) {
         scene->objects = new;
-        new->next = NULL;
         return (1);
     }
     while (cursor->next != NULL)
@@ -79,10 +78,8 @@ int destroy_picture(scene_entity_t *scene, object_entity_t *obj)
     if (last == obj)
         scene->objects = obj->next;
     else {
-        while (last != NULL && last->next != obj)
+        while (last->next != obj)
             last = last->next;
-        if (last == NULL)
-            return (0);
         last->next = obj->next;
     }
     destroy_error(obj, 1, 1);
