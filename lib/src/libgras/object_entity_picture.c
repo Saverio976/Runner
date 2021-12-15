@@ -46,6 +46,7 @@ static object_entity_t *create_picture_create(char const *path, sfVector2f pos,
     new->update = update_ptr;
     new->object_is_visible = 0;
     new->next = NULL;
+    new->data = NULL;
     return (new);
 }
 

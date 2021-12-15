@@ -50,6 +50,7 @@ int create_music(scene_entity_t *scene, char const *path,
     while (cursor->next != NULL)
         cursor = cursor->next;
     cursor->next = new;
+    new->data = NULL;
     return (1);
 }
 
