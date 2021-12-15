@@ -13,11 +13,13 @@
 // MACRO
 
     #define INTRO_BG_PATH "assets/background/intro.png"
+    #define SETTINGS_BG_PATH "assets/background/blue.jpg"
     #define MENU_MUSIC_PATH "assets/music/forever_bound_stereo_madness.ogg"
     #define FONT_PATH "assets/fonts/fonts.otf"
     #define DEFAULT_BG_IMG "assets/background/blue.jpg"
     #define PLAY_BUTTON_PATH "assets/buttons/play.png"
     #define PARALAX_2_PATH "assets/background/paralax_2.png"
+    #define PARALAX_3_PATH "assets/background/paralax_2_building.png"
     #define DEFAULT_BLOCK_IMG "assets/ground/block.png"
     #define DEFAULT_SPIKE_IMG "assets/spikes/spike.png"
     #define DEFAULT_MAP_PATH "map/42.txt"
@@ -33,6 +35,7 @@ struct settings {
     int speed_paralax_1;
     int speed_paralax_2;
     int speed_paralax_3;
+    int speed_paralax_4;
     char const *background_img;
     char const *map_path;
     char const *block_img;
@@ -145,6 +148,15 @@ int switch_map_prev(object_entity_t *, scene_entity_t *,
 int print_current_map(object_entity_t *, scene_entity_t *,
         window_controller_t *);
 
+int print_current_bg(object_entity_t *, scene_entity_t *,
+        window_controller_t *);
+
+int switch_bg_prev(object_entity_t *, scene_entity_t *,
+        window_controller_t *);
+
+int switch_bg_next(object_entity_t *, scene_entity_t *,
+        window_controller_t *);
+
 // *****************
 // GAME
 
@@ -166,6 +178,9 @@ int o_update_game_time(object_entity_t *, scene_entity_t *,
         window_controller_t *);
 
 int o_update_game_paralax_2(object_entity_t *, scene_entity_t *,
+        window_controller_t *);
+
+int draw_paralax_3(object_entity_t *, scene_entity_t *,
         window_controller_t *);
 
 // OTHER
