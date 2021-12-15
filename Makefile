@@ -110,3 +110,13 @@ init_repo:
 	cp -r ~/.src/SAMPLE_C_PROJECT/.github ..
 	touch ../obj/.keep
 	touch ../lib/obj/.keep
+
+.PHONY: make_prog
+make_prog: re
+	rm -rf ../geometry-glitch.tar.gz
+	mkdir ../geometry-glitch/
+	cp $(TARGET) ../geometry-glitch/
+	cp -r assets/ ../geometry-glitch
+	cp -r map/ ../geometry-glitch
+	tar czf ../geometry-glitch.tar.gz ../geometry-glitch/
+	rm -rf ../geometry-glitch/
