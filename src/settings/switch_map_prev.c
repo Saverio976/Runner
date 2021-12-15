@@ -5,7 +5,7 @@
 ** change the map
 */
 
-#include "maps.h"
+#include "paths.h"
 #include "my_gras.h"
 #include "my_runner.h"
 
