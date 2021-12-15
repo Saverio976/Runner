@@ -7,7 +7,6 @@
 
 #include "my_gras.h"
 #include "my_runner.h"
-#include "my_puts.h"
 
 int main(void)
 {
