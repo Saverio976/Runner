@@ -10,8 +10,9 @@
 
     #include <stddef.h>
 
-static const int NUMBER_MAPS = 3;
+static const int NUMBER_MAPS = 7;
 static const char *MAPS[] = {"map/42.txt", "map/basic.txt",
-    "map/some_tricky.txt", NULL};
+    "map/some_tricky.txt", "map/matthieu.txt",
+    "map/UwU.txt", "map/xddl.txt", "map/test.txt", NULL};
 
 #endif
