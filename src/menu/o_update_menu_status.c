@@ -21,7 +21,7 @@ int o_update_menu_status(object_entity_t *obj,
     else
         sfText_setString(obj->text, "last game : (no data)");
     sfText_setFillColor(obj->text, sfRed);
-    sfText_setCharacterSize(obj->text, 28);
+    sfText_setCharacterSize(obj->text, 34);
     sfRenderWindow_drawText(manager->win, obj->text, NULL);
     return (0);
 }
