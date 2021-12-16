@@ -49,7 +49,8 @@ static int jump_player(game_player_t *player)
 {
     if (sfTime_asSeconds(sfClock_getElapsedTime(player->clock)) < 1.0 / 20.0)
         return (0);
-    if (sfKeyboard_isKeyPressed(sfKeySpace) && player->on_ground == 1) {
+    if ((sfKeyboard_isKeyPressed(sfKeySpace) ||
+                sfKeyboard_isKeyPressed(sfKeyUp)) && player->on_ground == 1) {
         player->buffer_gravity -= player->gravity * 5;
         player->pos.y -= 5;
         player->on_ground = 0;
