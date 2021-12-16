@@ -62,5 +62,7 @@ void w_destroy_runner(window_controller_t *manager)
     }
     sfMusic_destroy(data->music);
     sfClock_destroy(manager->clock);
+    if (data->icon)
+        sfImage_destroy(data->icon);
     free(manager->data);
 }
