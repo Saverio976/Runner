@@ -118,6 +118,7 @@ init_repo:
 
 .PHONY: make_prog
 make_prog: re
+	rm -rf ../geometry-glitch/
 	rm -rf ../geometry-glitch.tar.gz
 	mkdir ../geometry-glitch/
 	cp $(TARGET) ../geometry-glitch/
