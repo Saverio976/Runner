@@ -53,6 +53,7 @@ struct game_runner {
     int is_playing;
     settings_t settings;
     int is_win;
+    sfImage *icon;
 };
 
 struct game_player {
