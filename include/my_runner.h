@@ -120,6 +120,9 @@ int o_update_menu_play(object_entity_t *, scene_entity_t *,
 int o_update_menu_status(object_entity_t *, scene_entity_t *,
         window_controller_t *);
 
+int draw_explanation(object_entity_t *, scene_entity_t *,
+        window_controller_t *);
+
 // *****************
 // SETTINGS
 
