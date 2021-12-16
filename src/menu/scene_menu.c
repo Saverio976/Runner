@@ -27,7 +27,7 @@ int s_create_menu(scene_entity_t *scene,
     sfVector2f pos_bg = {0, 0};
     sfVector2f pos_settings = {50, 500};
     sfVector2f pos_but = {360, 260};
-    sfVector2f pos_status = {400, 20};
+    sfVector2f pos_status = {250, 180};
 
     create_picture(scene, INTRO_BG_PATH, pos_bg, &o_update_intro_background);
     create_text(scene, FONT_PATH, pos_settings, &o_update_menu_settings);
