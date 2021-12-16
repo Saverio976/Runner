@@ -20,7 +20,6 @@ static void create_data(game_runner_t *data)
     data->settings.background_img = DEFAULT_BG_IMG;
     data->settings.block_img = DEFAULT_BLOCK_IMG;
     data->settings.spike_img = DEFAULT_SPIKE_IMG;
-    data->settings.map_path = DEFAULT_MAP_PATH;
     data->settings.player_img = DEFAULT_PLAYER_IMG;
     data->settings.end_img = DEFAULT_END_IMG;
     data->settings.music_path = MENU_MUSIC_PATH;

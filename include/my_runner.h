@@ -75,6 +75,14 @@ int restart_game(scene_entity_t *, window_controller_t *);
 
 int check_point_in(float, float, sfFloatRect *);
 
+int len_calc(char const *);
+
+int print_error(char const *, char const *);
+
+int print_msg(char const *);
+
+int print_help(char const *);
+
 // ****************************************************************************
 // WINDOW_controller
 // ****************************************************************************

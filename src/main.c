@@ -7,14 +7,36 @@
 
 #include "my_gras.h"
 #include "my_runner.h"
+#include <unistd.h>
+#include <fcntl.h>
 
-int main(void)
+
+
+static int check_file_path(char **av)
+{
+    int fd = open(av[1], O_RDONLY);
+
+    if (fd < 0)
+        return (0);
+    close(fd);
+    return (1);
+}
+
+int main(int ac, char **av)
 {
     sfVideoMode mode = {800, 600, 32};
-    window_controller_t *manager = create(w_create_runner, w_destroy_runner);
+    window_controller_t *manager;
 
+    if (ac < 2)
+        return (print_error(av[0], ": need one args; retry with -h\n"));
+    if (check_file_path(av) == 0)
+        return (print_error(av[0], ": provide a map available\n"));
+    if (len_calc(av[1]) == 2 && av[1][0] == '-' && av[1][1] == 'h')
+        return (print_help(av[0]));
+    manager = create(w_create_runner, w_destroy_runner);
     if (manager == NULL)
         return (84);
+    ((game_runner_t *) manager->data)->settings.map_path = av[1];
     create_scene(manager, s_create_intro, s_update_intro, s_destroy_intro);
     create_scene(manager, s_create_menu, s_update_menu, s_destroy_menu);
     create_scene(manager, s_create_settings, s_update_settings,
