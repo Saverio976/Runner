@@ -43,6 +43,8 @@ static void end(window_controller_t *manager)
 int start(window_controller_t *manager, char const *title, sfVideoMode mode,
         sfUint32 style)
 {
+    sfFloatRect rect = {0, 0, 800, 600};
+    sfView *view = sfView_createFromRect(rect);
     int ret_code = 0;
 
     if (manager == NULL)
@@ -50,8 +52,10 @@ int start(window_controller_t *manager, char const *title, sfVideoMode mode,
     if (manager->current_zindex < 0)
         return (84);
     manager->win = sfRenderWindow_create(mode, title, style | sfClose, NULL);
+    sfRenderWindow_setView(manager->win, view);
     sfRenderWindow_setFramerateLimit(manager->win, 60);
     ret_code = game_controller(manager);
     end(manager);
+    sfView_destroy(view);
     return (ret_code);
 }
