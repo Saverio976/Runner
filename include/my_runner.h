@@ -25,6 +25,7 @@
     #define DEFAULT_MAP_PATH "map/42.txt"
     #define DEFAULT_PLAYER_IMG "assets/player/cubes_1.png"
     #define DEFAULT_END_IMG "assets/end_block/end_block.png"
+    #define DEFAULT_JUMP_IMG "assets/bumper/bumper.png"
 
 typedef struct game_runner game_runner_t;
 typedef struct game_player game_player_t;
@@ -43,6 +44,7 @@ struct settings {
     char const *player_img;
     char const *end_img;
     char const *music_path;
+    char const *jump_img;
 };
 
 struct game_runner {
@@ -56,9 +58,9 @@ struct game_runner {
 struct game_player {
     sfTexture *texture;
     sfSprite *sprite;
-    int gravity;
+    float gravity;
     sfVector2f pos;
-    int buffer_gravity;
+    float buffer_gravity;
     int on_ground;
     sfClock *clock;
 };
@@ -82,6 +84,8 @@ int print_error(char const *, char const *);
 int print_msg(char const *);
 
 int print_help(char const *);
+
+int collision_between(game_player_t *, object_entity_t *);
 
 // ****************************************************************************
 // WINDOW_controller
