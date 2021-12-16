@@ -42,6 +42,7 @@ struct settings {
     char const *spike_img;
     char const *player_img;
     char const *end_img;
+    char const *music_path;
 };
 
 struct game_runner {
@@ -155,6 +156,15 @@ int switch_bg_prev(object_entity_t *, scene_entity_t *,
         window_controller_t *);
 
 int switch_bg_next(object_entity_t *, scene_entity_t *,
+        window_controller_t *);
+
+int print_current_music(object_entity_t *, scene_entity_t *,
+        window_controller_t *);
+
+int switch_music_prev(object_entity_t *, scene_entity_t *,
+        window_controller_t *);
+
+int switch_music_next(object_entity_t *, scene_entity_t *,
         window_controller_t *);
 
 // *****************
