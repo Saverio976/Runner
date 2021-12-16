@@ -24,6 +24,9 @@ int o_update_menu_play(object_entity_t *obj,
             manager->current_zindex = 3;
             restart_game(scene->next->next, manager);
         }
+    } else if (sfKeyboard_isKeyPressed(sfKeySpace)) {
+        manager->current_zindex = 3;
+        restart_game(scene->next->next, manager);
     } else {
         sfSprite_setScale(obj->sprite, normal);
     }
