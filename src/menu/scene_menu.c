@@ -28,10 +28,12 @@ int s_create_menu(scene_entity_t *scene,
     sfVector2f pos_settings = {50, 500};
     sfVector2f pos_but = {360, 260};
     sfVector2f pos_status = {250, 180};
+    sfVector2f pos_explanation = {250, 500};
 
     create_picture(scene, INTRO_BG_PATH, pos_bg, &o_update_intro_background);
     create_text(scene, FONT_PATH, pos_settings, &o_update_menu_settings);
     create_picture(scene, PLAY_BUTTON_PATH, pos_but, &o_update_menu_play);
     create_text(scene, FONT_PATH, pos_status, o_update_menu_status);
+    create_text(scene, FONT_PATH, pos_explanation, draw_explanation);
     return (1);
 }
