@@ -7,9 +7,16 @@
 
 #include "my_gras.h"
 
-static void check_need_close(window_controller_t *manager)
+static void check_event(window_controller_t *manager, int *is_pause)
 {
     if (manager->event.type == sfEvtClosed)
+        sfRenderWindow_close(manager->win);
+    if (manager->event.type == sfEvtKeyPressed &&
+            manager->event.key.code == sfKeyPause) {
+        *is_pause *= -1;
+    }
+    if (manager->event.type == sfEvtKeyPressed &&
+            manager->event.key.code == sfKeyEscape)
         sfRenderWindow_close(manager->win);
 }
 
@@ -30,17 +37,20 @@ static int game_loop(window_controller_t *manager, sfClock *clock)
 {
     scene_entity_t *curr;
     int ret_code = 0;
+    static int is_pause = -1;
 
     if (sfTime_asSeconds(sfClock_getElapsedTime(clock)) < 1.0 / 120.0)
         return (0);
-    sfRenderWindow_clear(manager->win, sfBlack);
-    curr = get_current_scene_entity(manager);
-    if (curr == NULL)
-        ret_code = 84;
-    else
-        ret_code = update(curr, manager);
+    if (is_pause == -1) {
+        sfRenderWindow_clear(manager->win, sfBlack);
+        curr = get_current_scene_entity(manager);
+        if (curr == NULL)
+            ret_code = 84;
+        else
+            ret_code = update(curr, manager);
+    }
     while (sfRenderWindow_pollEvent(manager->win, &manager->event))
-        check_need_close(manager);
+        check_event(manager, &is_pause);
     sfClock_restart(clock);
     return (ret_code);
 }
