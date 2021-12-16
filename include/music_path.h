@@ -14,6 +14,8 @@
 static const char *MUSICS[] = {
     "assets/music/djvi_base_after_base.ogg",
     "assets/music/forever_bound_stereo_madness.ogg",
+    "assets/music/djvi_cant_let_go.ogg",
+    "assets/music/waterflame_jumper.ogg",
     NULL
 };
 
