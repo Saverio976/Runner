@@ -28,6 +28,10 @@ static void add_settings_button(scene_entity_t *scene)
     sfVector2f pos_prev_bg = {10, 70};
     sfVector2f pos_next_bg = {475, 70};
     sfVector2f pos_current_bg = {10, 100};
+    sfVector2f pos_prev_music = {10, 135};
+    sfVector2f pos_next_music = {475, 135};
+    sfVector2f pos_current_music = {10, 165};
+
 
     create_text(scene, FONT_PATH, pos_prev_map, switch_map_prev);
     create_text(scene, FONT_PATH, pos_next_map, switch_map_next);
@@ -35,6 +39,9 @@ static void add_settings_button(scene_entity_t *scene)
     create_text(scene, FONT_PATH, pos_prev_bg, switch_bg_prev);
     create_text(scene, FONT_PATH, pos_next_bg, switch_bg_next);
     create_text(scene, FONT_PATH, pos_current_bg, print_current_bg);
+    create_text(scene, FONT_PATH, pos_prev_music, switch_music_prev);
+    create_text(scene, FONT_PATH, pos_next_music, switch_music_next);
+    create_text(scene, FONT_PATH, pos_current_music, print_current_music);
 }
 
 int s_create_settings(scene_entity_t *scene,
