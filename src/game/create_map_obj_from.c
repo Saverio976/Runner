@@ -37,7 +37,7 @@ static void process_data(game_runner_t *data, scene_entity_t *scene, char c,
     object_entity_t *obj;
     char const *tmp;
 
-    if (c != 'b' && c != 's' && c != 'f')
+    if (c != 'b' && c != 's' && c != 'f' && c != 'j')
         return;
     if (c == 'b')
         tmp = data->settings.block_img;
@@ -45,15 +45,13 @@ static void process_data(game_runner_t *data, scene_entity_t *scene, char c,
         tmp = data->settings.spike_img;
     if (c == 'f')
         tmp = data->settings.end_img;
+    if (c == 'j')
+        tmp = data->settings.jump_img;
     get_position(c, &pos, tmp);
     create_picture(scene, tmp, pos, o_update_game_block);
     for (obj = scene->objects; obj->next != NULL; obj = obj->next);
-    if (c == 's')
-        obj->data = (void *) 1;
-    else if (c == 'f')
-        obj->data = (void *) 2;
-    else
-        obj->data = NULL;
+    obj->data = 0;
+    for (char i = 0; i < c; i++, obj->data = (char *) obj->data + 1);
 }
 
 int create_map_obj_from(game_runner_t *data, scene_entity_t *scene)
