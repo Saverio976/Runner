@@ -30,7 +30,7 @@ int main(int ac, char **av)
     if (ac < 2)
         return (print_error(av[0], ": need one args; retry with -h\n"));
     if (check_file_path(av) == 0)
-        return (print_error(av[0], ": provide a map available\n"));
+        return (print_error(av[0], ": provide a map available (map/42.txt)\n"));
     if (len_calc(av[1]) == 2 && av[1][0] == '-' && av[1][1] == 'h')
         return (print_help(av[0]));
     manager = create(w_create_runner, w_destroy_runner);
