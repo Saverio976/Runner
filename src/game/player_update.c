@@ -55,10 +55,13 @@ static int jump_player(game_player_t *player)
         player->on_ground = 0;
         sfSprite_setPosition(player->sprite, player->pos);
     }
-    if (player->on_ground == 0)
+    if (player->on_ground == 0) {
         player->buffer_gravity += player->gravity;
-    else
+        sfSprite_rotate(player->sprite, 25);
+    } else {
         player->buffer_gravity += player->gravity / 2;
+        sfSprite_setRotation(player->sprite, 0);
+    }
     sfClock_restart(player->clock);
     return (0);
 }
@@ -72,6 +75,8 @@ static int update_gravity_player(game_player_t *player, scene_entity_t *scene)
         if (cursor->type != SPRITE || collision_between(player, cursor) == 0 ||
                 cursor->data != NULL)
             continue;
+        if (bounds_pl.top + bounds_pl.height > cursor->pos.y + 40)
+            return (1);
         while (bounds_pl.top + bounds_pl.height > cursor->pos.y) {
             player->pos.y -= 1;
             bounds_pl.top -= 1;
@@ -91,13 +96,13 @@ int player_update(scene_entity_t *scene,
     int end = check_end_game(player, scene);
 
     if (end == 1)
-        pass_game_to_menu(manager, 0);
-    else if (end == 2)
-        pass_game_to_menu(manager, 1);
-    else {
-        update_gravity_player(player, scene);
-        sfSprite_setPosition(player->sprite, player->pos);
-        sfRenderWindow_drawSprite(manager->win, player->sprite, NULL);
-    }
+        return (pass_game_to_menu(manager, 0));
+    if (end == 2)
+        return (pass_game_to_menu(manager, 1));
+    end = update_gravity_player(player, scene);
+    if (end == 1)
+        return (pass_game_to_menu(manager, 0));
+    sfSprite_setPosition(player->sprite, player->pos);
+    sfRenderWindow_drawSprite(manager->win, player->sprite, NULL);
     return (0);
 }

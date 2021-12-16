@@ -7,6 +7,7 @@
 
 #include "my_gras.h"
 #include "my_runner.h"
+#include "scenes_settings.h"
 
 int s_update_settings(__attribute__((unused)) scene_entity_t *scene,
         __attribute__((unused)) window_controller_t *manager)
@@ -22,26 +23,24 @@ void s_destroy_settings(__attribute__((unused)) scene_entity_t *scene,
 
 static void add_settings_button(scene_entity_t *scene)
 {
-    sfVector2f pos_prev_map = {10, 5};
-    sfVector2f pos_next_map = {600, 5};
-    sfVector2f pos_current_map = {10, 35};
-    sfVector2f pos_prev_bg = {10, 70};
-    sfVector2f pos_next_bg = {475, 70};
-    sfVector2f pos_current_bg = {10, 100};
-    sfVector2f pos_prev_music = {10, 135};
-    sfVector2f pos_next_music = {475, 135};
-    sfVector2f pos_current_music = {10, 165};
-
-
-    create_text(scene, FONT_PATH, pos_prev_map, switch_map_prev);
-    create_text(scene, FONT_PATH, pos_next_map, switch_map_next);
-    create_text(scene, FONT_PATH, pos_current_map, print_current_map);
-    create_text(scene, FONT_PATH, pos_prev_bg, switch_bg_prev);
-    create_text(scene, FONT_PATH, pos_next_bg, switch_bg_next);
-    create_text(scene, FONT_PATH, pos_current_bg, print_current_bg);
-    create_text(scene, FONT_PATH, pos_prev_music, switch_music_prev);
-    create_text(scene, FONT_PATH, pos_next_music, switch_music_next);
-    create_text(scene, FONT_PATH, pos_current_music, print_current_music);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 5}, switch_map_prev);
+    create_text(scene, FONT_PATH, (sfVector2f) {600, 5}, switch_map_next);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 35}, print_current_map);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 70}, switch_bg_prev);
+    create_text(scene, FONT_PATH, (sfVector2f) {475, 70}, switch_bg_next);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 100}, print_current_bg);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 135}, switch_music_prev);
+    create_text(scene, FONT_PATH, (sfVector2f) {475, 135}, switch_music_next);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 165}, print_current_music);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 200}, switch_spike_prev);
+    create_text(scene, FONT_PATH, (sfVector2f) {475, 200}, switch_spike_next);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 230}, print_current_spike);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 265}, switch_ground_prev);
+    create_text(scene, FONT_PATH, (sfVector2f) {475, 265}, switch_ground_next);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 295}, print_current_ground);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 330}, switch_player_prev);
+    create_text(scene, FONT_PATH, (sfVector2f) {475, 330}, switch_player_next);
+    create_text(scene, FONT_PATH, (sfVector2f) {10, 360}, print_current_player);
 }
 
 int s_create_settings(scene_entity_t *scene,

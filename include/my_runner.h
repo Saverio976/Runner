@@ -129,44 +129,6 @@ int s_update_settings(scene_entity_t *, window_controller_t *);
 
 void s_destroy_settings(scene_entity_t *, window_controller_t *);
 
-// OBJ
-
-int o_update_settings_music(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
-int o_update_settings_menu(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
-int o_update_settings_switch(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
-int switch_map_next(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
-int switch_map_prev(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
-int print_current_map(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
-int print_current_bg(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
-int switch_bg_prev(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
-int switch_bg_next(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
-int print_current_music(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
-int switch_music_prev(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
-int switch_music_next(object_entity_t *, scene_entity_t *,
-        window_controller_t *);
-
 // *****************
 // GAME
 

@@ -5,13 +5,13 @@
 ** change the map
 */
 
-#include "paths.h"
+#include "music_path.h"
 #include "my_gras.h"
 #include "my_runner.h"
 
 static void update_current_music(window_controller_t *manager)
 {
-    static int current = 0;
+    static int current = 1;
     game_runner_t *data;
 
     if (sfTime_asSeconds(sfClock_getElapsedTime(manager->clock)) < 0.5)
@@ -38,7 +38,7 @@ int switch_music_prev(object_entity_t *obj,
     sfVector2i pos = sfMouse_getPositionRenderWindow(manager->win);
     sfFloatRect pos_txt = sfText_getGlobalBounds(obj->text);
 
-    sfText_setString(obj->text, "music next ->");
+    sfText_setString(obj->text, "<- music prev");
     if (pos_txt.left <= pos.x && pos.x <= pos_txt.left + pos_txt.width &&
             pos_txt.top <= pos.y && pos.y <= pos_txt.top + pos_txt.height) {
         sfText_setCharacterSize(obj->text, 30);

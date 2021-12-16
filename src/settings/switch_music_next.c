@@ -5,13 +5,13 @@
 ** change the map
 */
 
-#include "paths.h"
+#include "music_path.h"
 #include "my_gras.h"
 #include "my_runner.h"
 
 static void update_current_music(window_controller_t *manager)
 {
-    static int current = 0;
+    static int current = 1;
     game_runner_t *data;
 
     if (sfTime_asSeconds(sfClock_getElapsedTime(manager->clock)) < 0.5)

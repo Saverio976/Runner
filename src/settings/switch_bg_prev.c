@@ -5,13 +5,13 @@
 ** change the map
 */
 
-#include "paths.h"
+#include "backgrounds_path.h"
 #include "my_gras.h"
 #include "my_runner.h"
 
-static void update_current_map(window_controller_t *manager)
+static void update_current_bg(window_controller_t *manager)
 {
-    static int current = 0;
+    static int current = 1;
     game_runner_t *data;
 
     if (sfTime_asSeconds(sfClock_getElapsedTime(manager->clock)) < 0.5)
@@ -35,7 +35,7 @@ int switch_bg_prev(object_entity_t *obj,
         sfText_setCharacterSize(obj->text, 30);
         sfText_setFillColor(obj->text, sfRed);
         if (sfMouse_isButtonPressed(sfMouseLeft))
-            update_current_map(manager);
+            update_current_bg(manager);
     } else {
         sfText_setCharacterSize(obj->text, 28);
         sfText_setFillColor(obj->text, sfWhite);

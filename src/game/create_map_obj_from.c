@@ -10,6 +10,27 @@
 #include "my_gras.h"
 #include "my_runner.h"
 
+static void get_position(char c, sfVector2f *pos, char const *tmp)
+{
+    sfTexture *texture;
+    sfSprite *sprite;
+    sfFloatRect bounds;
+
+    pos->y *= 60;
+    pos->x *= 53;
+    if (c != 's')
+        return;
+    texture = sfTexture_createFromFile(tmp, NULL);
+    sprite = sfSprite_create();
+    if (!texture || !sprite)
+        return;
+    sfSprite_setTexture(sprite, texture, sfTrue);
+    bounds = sfSprite_getGlobalBounds(sprite);
+    pos->y += 60 - bounds.height;
+    sfSprite_destroy(sprite);
+    sfTexture_destroy(texture);
+}
+
 static void process_data(game_runner_t *data, scene_entity_t *scene, char c,
         sfVector2f pos)
 {
@@ -24,8 +45,7 @@ static void process_data(game_runner_t *data, scene_entity_t *scene, char c,
         tmp = data->settings.spike_img;
     if (c == 'f')
         tmp = data->settings.end_img;
-    pos.x *= 53;
-    pos.y *= 60;
+    get_position(c, &pos, tmp);
     create_picture(scene, tmp, pos, o_update_game_block);
     for (obj = scene->objects; obj->next != NULL; obj = obj->next);
     if (c == 's')
