@@ -35,7 +35,7 @@ int print_help(char const *exe)
     print_msg(exe);
     print_msg(" map.txt\n\n"
             "DESCRIPTION\n"
-            "\tmap.txt\tthe map to load\n\n"
+            "\tmap.txt\tthe map to load (for example : map/42.txt)\n\n"
             "OPTIONS\n"
             "\t-h\tprint the usage\n\n"
             "USER INTERACTIONS\n"
