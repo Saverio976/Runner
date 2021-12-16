@@ -33,9 +33,10 @@ int print_help(char const *exe)
     print_msg("Finite runner created with CSFML\n\n"
             "USAGE\n\t");
     print_msg(exe);
-    print_msg(" map.txt\n\n"
+    print_msg(" map.txt [flag]\n\n"
             "DESCRIPTION\n"
-            "\tmap.txt\tthe map to load (for example : map/42.txt)\n\n"
+            "\tmap.txt\tthe map to load (for example : map/42.txt)\n"
+            "\tflag\t-f\tto force the fullscreen\n\n"
             "OPTIONS\n"
             "\t-h\tprint the usage\n\n"
             "USER INTERACTIONS\n"
