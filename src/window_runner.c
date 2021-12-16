@@ -23,6 +23,7 @@ static void create_data(game_runner_t *data)
     data->settings.map_path = DEFAULT_MAP_PATH;
     data->settings.player_img = DEFAULT_PLAYER_IMG;
     data->settings.end_img = DEFAULT_END_IMG;
+    data->settings.music_path = MENU_MUSIC_PATH;
     data->is_win = -1;
 }
 
