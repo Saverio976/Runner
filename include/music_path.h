@@ -9,7 +9,7 @@
     #define MUSICS_H_
 
     #include <stddef.h>
-    #define NUMBER_MUSICS 2
+    #define NUMBER_MUSICS 4
 
 static const char *MUSICS[] = {
     "assets/music/djvi_base_after_base.ogg",
