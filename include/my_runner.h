@@ -26,6 +26,7 @@
     #define DEFAULT_PLAYER_IMG "assets/player/cubes_1.png"
     #define DEFAULT_END_IMG "assets/end_block/end_block.png"
     #define DEFAULT_JUMP_IMG "assets/bumper/bumper.png"
+    #define ICON_EXPLODE "assets/player/bubes_1_expl.png"
 
 typedef struct game_runner game_runner_t;
 typedef struct game_player game_player_t;
