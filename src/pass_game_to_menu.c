@@ -31,13 +31,33 @@ void explode_sprite(sfSprite *sprite, window_controller_t *manager,
     }
 }
 
+sfMusic *create_the_music(void)
+{
+    sfMusic *music = sfMusic_createFromFile(DEATH_SOUND);
+
+    if (!music)
+        return (NULL);
+    sfMusic_setLoop(music, sfTrue);
+    sfMusic_play(music);
+    return (music);
+}
+
+void destroy_this(sfTexture *texture, sfSprite *sprite, sfMusic *music)
+{
+    sfSprite_destroy(sprite);
+    sfTexture_destroy(texture);
+    sfMusic_stop(music);
+    sfMusic_destroy(music);
+}
+
 void do_icon_explode(window_controller_t *manager, int is_win,
         scene_entity_t *scene)
 {
     sfTexture *texture;
     sfSprite *sprite;
+    sfMusic *music = create_the_music();
 
-    if (is_win)
+    if (is_win || music == NULL)
         return;
     texture = sfTexture_createFromFile(ICON_EXPLODE, NULL);
     if (!texture)
@@ -49,8 +69,7 @@ void do_icon_explode(window_controller_t *manager, int is_win,
     }
     sfSprite_setTexture(sprite, texture, sfTrue);
     explode_sprite(sprite, manager, scene->data);
-    sfSprite_destroy(sprite);
-    sfTexture_destroy(texture);
+    destroy_this(texture, sprite, music);
 }
 
 int pass_game_to_menu(window_controller_t *manager, int is_win)
