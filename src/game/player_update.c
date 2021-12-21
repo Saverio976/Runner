@@ -32,8 +32,6 @@ static int check_end_game(game_player_t *player, scene_entity_t *scene)
 
 static int jump_player(game_player_t *player)
 {
-    if (sfTime_asSeconds(sfClock_getElapsedTime(player->clock)) < 1.0 / 20.0)
-        return (0);
     if ((sfKeyboard_isKeyPressed(sfKeySpace) ||
                 sfKeyboard_isKeyPressed(sfKeyUp)) && player->on_ground == 1) {
         player->buffer_gravity -= player->gravity * 5;
@@ -41,34 +39,41 @@ static int jump_player(game_player_t *player)
         player->on_ground = 0;
         sfSprite_setPosition(player->sprite, player->pos);
     }
+    if (sfTime_asSeconds(sfClock_getElapsedTime(player->clock)) < 1.0 / 20.0)
+        return (0);
     if (player->on_ground == 0) {
         player->buffer_gravity += player->gravity;
         sfSprite_rotate(player->sprite, 25);
     } else {
-        player->buffer_gravity += player->gravity / 2;
         sfSprite_setRotation(player->sprite, 0);
     }
     sfClock_restart(player->clock);
     return (0);
 }
 
-static int do_update_buffer_gravity(sfFloatRect b, object_entity_t *cursor,
-        game_player_t *player)
+static void do_update_buffer_gravity(sfFloatRect b, object_entity_t *c,
+        game_player_t *player, int *on_ground)
 {
-    if (b.top + b.height > cursor->pos.y + 10 &&
-            cursor->data == (void *) 106) {
+    if (b.top + b.height > c->pos.y + 10 && c->data == (void *) 106) {
         player->buffer_gravity -= player->gravity * 6;
         player->pos.y -= 60;
         player->on_ground = 0;
-        return (0);
+        return;
     }
-    while (b.top + b.height > cursor->pos.y) {
-        b.top -= 1;
-        player->pos.y -= 1;
-        player->on_ground = 1;
+    *on_ground = 1;
+    sfSprite_setRotation(player->sprite, 0);
+    b = sfSprite_getGlobalBounds(player->sprite);
+    while (b.top + b.height < c->pos.y) {
+        b.top += 1;
+        player->pos.y += 1;
         player->buffer_gravity = 0;
     }
-    return (0);
+    while (b.top + b.height > c->pos.y) {
+        b.top -= 1;
+        player->pos.y -= 1;
+        player->buffer_gravity = 0;
+    }
+    player->pos.y += 3;
 }
 
 static int update_buffer_gravity_player(game_player_t *player,
@@ -77,6 +82,7 @@ static int update_buffer_gravity_player(game_player_t *player,
     sfFloatRect b = sfSprite_getGlobalBounds(player->sprite);
     object_entity_t *cursor = scene->objects;
     sfFloatRect bounds;
+    int on_ground = 0;
 
     for (; cursor != NULL; cursor = cursor->next) {
         if (cursor->type != SPRITE || collision_between(player, cursor) == 0 ||
@@ -88,8 +94,9 @@ static int update_buffer_gravity_player(game_player_t *player,
         if (b.top + b.height > cursor->pos.y + 40 &&
                 cursor->data == (void *) 98)
             return (1);
-        do_update_buffer_gravity(b, cursor, player);
+        do_update_buffer_gravity(b, cursor, player, &on_ground);
     }
+    player->on_ground = on_ground;
     return (0);
 }
 
