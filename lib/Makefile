@@ -9,9 +9,7 @@ TARGET		=	libmy.a
 
 SRCGRAS		=	src/libgras/
 
-OBJDIR		=	obj/
-
-VPATH		=	$(SRCGRAS) $(SRCMY) $(OBJDIR) include/
+VPATH		=	$(SRCGRAS) $(SRCMY) include/
 
 SRC		=	$(wildcard $(SRCGRAS)*.c)
 
@@ -22,7 +20,7 @@ CFLAGS		=	-Iinclude -Wall -Wextra -Wpedantic
 
 # ----------------------------------------------------------------------------
 
-$(OBJDIR)%.o: %.c
+%.o: %.c
 	@$(CC)     $(CFLAGS)     $^ -c -o $@
 	@echo -e '\033[0;36m$(notdir $^) -> $(notdir $@)\033[0m'
 
