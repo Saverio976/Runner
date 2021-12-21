@@ -41,7 +41,7 @@ FN_TEST_FLAGS	=	-ftest-coverage -fprofile-arcs
 
 %.o: %.c
 	@$(CC)     $(CFLAGS)    $^ -c -o $@
-	@echo -e '\033[0;36m$^ -> $@\033[0m'
+	@echo -e '\033[0;36m$(notdir $^) -> $(notdir $@)\033[0m'
 
 .PHONY: all
 all:	$(LIB_TARGET) $(TARGET) ## Build lib+binary
