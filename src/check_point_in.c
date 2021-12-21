@@ -20,7 +20,7 @@ int collision_between(game_player_t *player, object_entity_t *obj)
     for (int i = 5; i > 0; i--) {
         bounds_ob.top -= tmp;
         bounds_ob.left += bounds_ob.width / 3;
-        bounds_ob.width = (bounds_ob.width / 3) * 2;
+        bounds_ob.width = (bounds_ob.width / 3);
         if (sfFloatRect_intersects(&bounds_pl, &bounds_ob, NULL))
             return (1);
     }
