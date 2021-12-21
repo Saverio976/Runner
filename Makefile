@@ -13,25 +13,20 @@ TARGET_TEST	=	bin_test
 
 SRCDIR		=	src/
 
-OBJDIR		=	obj/
+VPATH		=	$(SRCDIR) lib/ include/ tests/
 
-VPATH		=	$(SRCDIR) $(OBJDIR) lib/ include/ tests/
-
-SRC		:=	$(wildcard $(SRCDIR)*.c)
+SRC		:=	$(shell find $(SRCDIR) -name '*.c')
 SRC		:=	$(filter-out $(SRCDIR)main.c, $(SRC))
 
 OBJ		:=	$(SRC:%.c=%.o)
-OBJ		:=	$(addprefix $(OBJDIR), $(notdir $(OBJ)))
 
 MAIN_SRC	=	$(SRCDIR)main.c
 
 MAIN_OBJ	:=	$(MAIN_SRC:%.c=%.o)
-MAIN_OBJ	:=	$(addprefix $(OBJDIR), $(notdir $(MAIN_OBJ)))
 
 TEST_SRC	= 	$(wildcard tests/*.c)
 
 TEST_OBJ	:=	$(TEST_SRC:%.c=%.o)
-TEST_OBJ	:=	$(addprefix $(OBJDIR), $(notdir $(TEST_OBJ)))
 
 CFLAGS		= 	-Iinclude/ -Ilib/include/ -Wall -Wextra -Wpedantic
 
@@ -44,26 +39,22 @@ FN_TEST_FLAGS	=	-ftest-coverage -fprofile-arcs
 
 # ----------------------------------------------------------------------------
 
-$(OBJDIR)%.o: %.c
+%.o: %.c
 	@$(CC)     $(CFLAGS)    $^ -c -o $@
 	@echo -e '\033[0;36m$^ -> $@\033[0m'
 
 .PHONY: all
 all:	$(LIB_TARGET) $(TARGET) ## Build lib+binary
 
-$(TARGET):	obj_scenes $(OBJ) $(MAIN_OBJ) ## Build the binary
-	@$(CC) $(OBJ) $(SRCDIR)obj/*.o $(MAIN_OBJ) -o $(TARGET) $(LFLAGS) $(CFLAGS)
+$(TARGET):	$(OBJ) $(MAIN_OBJ) ## Build the binary
+	@$(CC) $(OBJ) $(MAIN_OBJ) -o $(TARGET) $(LFLAGS) $(CFLAGS)
 	@echo -e '\033[0;32mdone : $(TARGET)\033[0m'
-
-obj_scenes:
-	@$(MAKE) -C $(SRCDIR)
 
 $(LIB_TARGET): ## Build the lib
 	$(MAKE) -C lib/
 
 .PHONY: clean
 clean: ## Clean obj and gcno/gcda
-	@$(MAKE) -C $(SRCDIR) clean
 	@rm -f $(OBJDIR)*.o
 	@rm -f vgcore.*
 	@rm -f **/*.gcno **/*.gcda
