@@ -2,9 +2,9 @@
                                                                                              bbbbbbbbbbbbbbbbbbbbbbbbb
                                                                                           bbb
                                                                                        bbb
-                                                            s      s                bbb                                  s     s
+                                                            s                       bbb                                  s     s
                                                                                  bbb                                      s     s
-                              bbb                                             bbb                                          s     s
-                           bbb                                             bbb                                              s     ssssssss
-                s s  s  bbb       sss sssb     sss       s     s   sss  bbb                                                              f
+                              bbb                                             bbb                                          s     sssssssss
+                           bbb                                             bbb                                              s
+                s s  s  bbb       sss  ssb     sss       s     s   sss  bbb                                                              f
 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
