@@ -9,9 +9,10 @@
     #define MAPS_H_
 
     #include <stddef.h>
-    #define NUMBER_MAPS 8
+    #define NUMBER_MAPS 9
 
 static const char *MAPS[] = {
+    "map/aurelie.txt",
     "map/42.txt",
     "map/basic.txt",
     "map/some_tricky.txt",
