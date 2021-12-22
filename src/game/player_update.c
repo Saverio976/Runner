@@ -58,21 +58,19 @@ static void do_update_buffer_gravity(sfFloatRect b, object_entity_t *c,
         player->buffer_gravity -= player->gravity * 6;
         player->pos.y -= 60;
         player->on_ground = 0;
+        sfSprite_setPosition(player->sprite, player->pos);
         return;
     }
     *on_ground = 1;
     sfSprite_setRotation(player->sprite, 0);
     b = sfSprite_getGlobalBounds(player->sprite);
-    while (b.top + b.height < c->pos.y) {
-        b.top += 1;
-        player->pos.y += 1;
-        player->buffer_gravity = 0;
-    }
-    while (b.top + b.height > c->pos.y) {
-        b.top -= 1;
-        player->pos.y -= 1;
-        player->buffer_gravity = 0;
-    }
+    for (int buff = 1; buff > -2; buff = buff - 2)
+        while ((buff == 1) ? b.top + b.height < c->pos.y :
+                b.top + b.height > c->pos.y) {
+            b.top += buff;
+            player->pos.y += buff;
+            player->buffer_gravity = 0;
+        }
     player->pos.y += 3;
 }
 
