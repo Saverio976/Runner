@@ -42,6 +42,7 @@ int print_help(char const *exe)
             "USER INTERACTIONS\n"
             "\tSpace\tjump in the game / start the game\n"
             "\tEscape\tquit the window\n"
-            "\tPause\tpause the game / resume it\n");
+            "\tPause\tpause the game / resume it\n"
+            "\tE\tenable/disable the VSync (default is disable)");
     return (0);
 }
