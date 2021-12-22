@@ -9,9 +9,10 @@
     #define MAPS_H_
 
     #include <stddef.h>
+    #include "runner_constants.h"
     #define NUMBER_MAPS 9
 
-static const char *MAPS[] = {
+static const char MAPS[NUMBER_MAPS][MAX_CHAR_IN_SETTINGS] = {
     "map/aurelie.txt",
     "map/42.txt",
     "map/basic.txt",
@@ -21,7 +22,6 @@ static const char *MAPS[] = {
     "map/xddl.txt",
     "map/NULL.txt",
     "map/if_you_want_edit_it.txt",
-    NULL
 };
 
 #endif
