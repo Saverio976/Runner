@@ -38,7 +38,7 @@ int main(int ac, char **av)
     sfVideoMode mode = {800, 600, 32};
     window_controller_t *manager;
     int fullscreen = 0;
-    sfUint32 style = 0;
+    sfUint32 style = sfNone;
     int ret_code = parse_args(ac, av, &fullscreen);
 
     if (ret_code != 1)
