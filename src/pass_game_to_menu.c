@@ -19,8 +19,10 @@ void explode_sprite(sfSprite *sprite, window_controller_t *manager,
     sfSprite_setPosition(sprite, pos);
     sfClock_restart(manager->clock);
     seconds = sfTime_asSeconds(sfClock_getElapsedTime(manager->clock));
+    sfRenderWindow_clear(manager->win, sfBlack);
     while (rect.left < 1000) {
         if (seconds > 1.0 / 15.0 + i) {
+            sfRenderWindow_clear(manager->win, sfBlack);
             sfSprite_setTextureRect(sprite, rect);
             rect.left += 100;
             sfRenderWindow_drawSprite(manager->win, sprite, NULL);
