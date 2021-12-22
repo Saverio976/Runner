@@ -48,6 +48,7 @@ int s_update_intro(scene_entity_t *scene,
     if (frame == 0) {
         create_icon(manager);
         sfRenderWindow_requestFocus(manager->win);
+        sfRenderWindow_setVerticalSyncEnabled(manager->win, sfFalse);
         frame++;
     }
     return (0);
