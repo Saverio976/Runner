@@ -8,3 +8,4 @@
 vgcore*
 my_runner
 bin_test
+valgrind.supp
