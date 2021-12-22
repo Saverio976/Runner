@@ -15,7 +15,8 @@ int draw_explanation(object_entity_t *obj,
     sfText_setString(obj->text,
             "Escape : Quit the game\n"
             "Pause : Freeze the game\n"
-            "Space : Jump / start the game");
+            "Space : Jump / start the game\n"
+            "E : Enabled/Disabled V-Sync");
     sfText_setCharacterSize(obj->text, 28);
     sfText_setFillColor(obj->text, sfGreen);
     sfRenderWindow_drawText(manager->win, obj->text, NULL);

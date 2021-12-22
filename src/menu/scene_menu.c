@@ -12,6 +12,16 @@
 int s_update_menu(__attribute__((unused)) scene_entity_t *scene,
         __attribute__((unused)) window_controller_t *manager)
 {
+    static int status = 0;
+
+    if (sfTime_asSeconds(sfClock_getElapsedTime(manager->clock)) < 0.5)
+        return (0);
+    if (sfKeyboard_isKeyPressed(sfKeyE)) {
+        status = !status;
+        sfRenderWindow_setVerticalSyncEnabled(manager->win, (status) ? sfTrue :
+                sfFalse);
+        sfClock_restart(manager->clock);
+    }
     return (0);
 }
 
