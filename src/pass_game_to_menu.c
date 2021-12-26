@@ -48,8 +48,10 @@ void destroy_this(sfTexture *texture, sfSprite *sprite, sfMusic *music)
 {
     sfSprite_destroy(sprite);
     sfTexture_destroy(texture);
-    sfMusic_stop(music);
-    sfMusic_destroy(music);
+    if (music) {
+        sfMusic_stop(music);
+        sfMusic_destroy(music);
+    }
 }
 
 void do_icon_explode(window_controller_t *manager, int is_win,
@@ -57,10 +59,11 @@ void do_icon_explode(window_controller_t *manager, int is_win,
 {
     sfTexture *texture;
     sfSprite *sprite;
-    sfMusic *music = create_the_music();
+    sfMusic *music = NULL;
 
-    if (is_win || music == NULL)
+    if (is_win)
         return;
+    music = create_the_music();
     texture = sfTexture_createFromFile(ICON_EXPLODE, NULL);
     if (!texture)
         return;
