@@ -12,13 +12,13 @@ int collision_between(game_player_t *player, object_entity_t *obj)
 {
     sfFloatRect bounds_pl = sfSprite_getGlobalBounds(player->sprite);
     sfFloatRect bounds_ob = sfSprite_getGlobalBounds(obj->sprite);
-    float tmp = bounds_ob.height / 5;
 
     if (obj->data != (void *) 115)
         return (sfFloatRect_intersects(&bounds_pl, &bounds_ob, NULL));
     bounds_ob.top += bounds_ob.height;
+    bounds_ob.height /= 5;
     for (int i = 5; i > 0; i--) {
-        bounds_ob.top -= tmp;
+        bounds_ob.top -= bounds_ob.height;
         bounds_ob.left += bounds_ob.width / 3;
         bounds_ob.width = (bounds_ob.width / 3);
         if (sfFloatRect_intersects(&bounds_pl, &bounds_ob, NULL))
