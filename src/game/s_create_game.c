@@ -30,7 +30,6 @@ static int create_scene_data(game_player_t *player, game_runner_t *data)
     return (1);
 }
 
-
 int restart_game_two(scene_entity_t *scene, game_runner_t *data)
 {
     game_player_t *player = (game_player_t *) scene->data;
