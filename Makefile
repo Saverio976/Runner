@@ -57,7 +57,8 @@ $(LIB_TARGET): ## Build the lib
 clean: ## Clean obj and gcno/gcda
 	@rm -f $(OBJ) $(MAIN_OBJ)
 	@rm -f vgcore.*
-	@rm -f **/*.gcno **/*.gcda
+	@rm -f `find . -name '*.gcno'`
+	@rm -f `find . -name '*.gcda'`
 
 .PHONY: fclean
 fclean:	clean ## Clean+Remove target/target_test and call lib fclean
