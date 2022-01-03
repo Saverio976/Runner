@@ -1,0 +1,83 @@
+a map is a file with 10 lines
+
+example of empty map :
+```txt
+
+
+
+
+
+
+
+
+
+
+```
+
+a block is a `b`
+
+example of a map with a ground :
+
+```txt
+
+
+
+
+
+
+
+
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+```
+
+to win, the player have to touch an end block (`f`) :
+
+example of map with an end :
+
+```txt
+
+
+
+
+
+
+
+
+                                     f
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+```
+but it is not very fun.
+
+to add a spike you need to put an `s`
+
+example of a level :
+
+```txt
+
+
+
+
+
+
+
+                 s
+            bbbbbbbbb      f
+bbbbbbbbbbbbb          bbbbb
+```
+
+and last but not least, you can add a `j` to add a jumper
+it is a block that do jump the player
+
+```txt
+
+
+
+
+
+
+
+
+      j s          f
+bbbbbbb   bbbbbbbbbb
+```
