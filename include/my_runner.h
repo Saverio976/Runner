@@ -14,6 +14,12 @@
 typedef struct game_runner game_runner_t;
 typedef struct game_player game_player_t;
 typedef struct settings settings_t;
+typedef struct intro_runner intro_runner_t;
+
+struct intro_runner {
+    sfSound *sound;
+    sfSoundBuffer *buff;
+};
 
 struct settings {
     int global_sound;

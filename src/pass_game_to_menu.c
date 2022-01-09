@@ -33,24 +33,32 @@ void explode_sprite(sfSprite *sprite, window_controller_t *manager,
     }
 }
 
-sfMusic *create_the_music(void)
+sfSound *create_the_music(void)
 {
-    sfMusic *music = sfMusic_createFromFile(DEATH_SOUND);
+    sfSoundBuffer *sound_buffer = sfSoundBuffer_createFromFile(DEATH_SOUND);
+    sfSound *sound = NULL;
 
-    if (!music)
+    if (!sound_buffer)
         return (NULL);
-    sfMusic_setLoop(music, sfTrue);
-    sfMusic_play(music);
-    return (music);
+    sound = sfSound_create();
+    if (!sound)
+        return (NULL);
+    sfSound_setBuffer(sound, sound_buffer);
+    sfSound_play(sound);
+    return (sound);
 }
 
-void destroy_this(sfTexture *texture, sfSprite *sprite, sfMusic *music)
+void destroy_this(sfTexture *texture, sfSprite *sprite, sfSound *sound)
 {
+    sfSoundBuffer const *buff;
+
     sfSprite_destroy(sprite);
     sfTexture_destroy(texture);
-    if (music) {
-        sfMusic_stop(music);
-        sfMusic_destroy(music);
+    if (sound) {
+        buff = sfSound_getBuffer(sound);
+        sfSound_stop(sound);
+        sfSound_destroy(sound);
+        sfSoundBuffer_destroy((sfSoundBuffer *) buff);
     }
 }
 
@@ -59,11 +67,11 @@ void do_icon_explode(window_controller_t *manager, int is_win,
 {
     sfTexture *texture;
     sfSprite *sprite;
-    sfMusic *music = NULL;
+    sfSound *sound = NULL;
 
     if (is_win)
         return;
-    music = create_the_music();
+    sound = create_the_music();
     texture = sfTexture_createFromFile(ICON_EXPLODE, NULL);
     if (!texture)
         return;
@@ -74,7 +82,7 @@ void do_icon_explode(window_controller_t *manager, int is_win,
     }
     sfSprite_setTexture(sprite, texture, sfTrue);
     explode_sprite(sprite, manager, scene->data);
-    destroy_this(texture, sprite, music);
+    destroy_this(texture, sprite, sound);
 }
 
 int pass_game_to_menu(window_controller_t *manager, int is_win)

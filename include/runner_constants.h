@@ -30,6 +30,7 @@ static const char DEFAULT_BLOCK_IMG[] = ASSETS_GROUND_PATH"block.png";
 static const char MENU_MUSIC_PATH[] = ASSETS_MUSIC_PATH
 "forever_bound_stereo_madness.ogg";
 static const char DEATH_SOUND[] = ASSETS_MUSIC_PATH"death_sound_effect.ogg";
+static const char INTRO_SOUND[] = ASSETS_MUSIC_PATH"intro.ogg";
     #define ASSETS_PLAYER_PATH "assets/player/"
 static const char DEFAULT_PLAYER_IMG[] = ASSETS_PLAYER_PATH"cubes_1.png";
 static const char ICON_EXPLODE[] = ASSETS_PLAYER_PATH"bubes_1_expl.png";

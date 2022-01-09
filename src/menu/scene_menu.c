@@ -18,8 +18,11 @@ int s_update_menu(__attribute__((unused)) scene_entity_t *scene,
         return (0);
     if (sfKeyboard_isKeyPressed(sfKeyE)) {
         status = !status;
-        sfRenderWindow_setVerticalSyncEnabled(manager->win, (status) ? sfTrue :
-                sfFalse);
+        if (status) {
+            sfRenderWindow_setVerticalSyncEnabled(manager->win, sfTrue);
+        } else {
+            sfRenderWindow_setVerticalSyncEnabled(manager->win, sfFalse);
+        }
         sfClock_restart(manager->clock);
     }
     return (0);
