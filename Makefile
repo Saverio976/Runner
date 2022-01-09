@@ -69,44 +69,14 @@ fclean:	clean ## Clean+Remove target/target_test and call lib fclean
 .PHONY: re
 re:	fclean all ## Fclean+All
 
+.PHONY: debug
+debug: CFLAGS += -g3
+debug: re
+	valgrind --leak-check=full --suppressions=valgrind.supp \
+		./$(TARGET) map/42.txt
+
 .PHONY: tests_run
-tests_run: cr_tests_run ## The rule called by Marvin to make coverage
-
-.PHONY: cr_tests_run
-cr_tests_run: CFLAGS += --coverage ## Criterion tests
-cr_tests_run: fclean $(LIB_TARGET) $(OBJ) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(TEST_OBJ) -o $(TARGET_TEST) $(LFLAGS) \
-		$(CR_TEST_FLAGS)
-	./$(TARGET_TEST)
-	gcovr --exclude tests/
-	gcovr --exclude tests/ --branch
-
-.PHONY: sanitize_tests_run
-sanitize_tests_run: CFLAGS += -fsanitize=address -fsanitize=undefined
-sanitize_tests_run: LFLAGS += -fsanitize=leak
-sanitize_tests_run: all
-
-.PHONY: fn_tests_run
-fn_tests_run: CFLAGS += $(FN_TEST_FLAGS) ## Fonctional tests
-fn_tests_run: fclean $(LIB_TARGET) $(OBJ) $(MAIN_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(MAIN_OBJ) -o $(TARGET_TEST) $(LFLAGS)
-	./tests/fn_tests.sh ./$(TARGET_TEST)
-	gcov $(TARGET_TEST)
-	gcovr --exclude tests/
-	gcovr --exclude tests/ --branch
-
-.PHONY: get_dot_files
-init_repo:
-	mv include/ ..
-	mv lib/ ..
-	mv obj/ ..
-	mv src/ ..
-	mv tests/ ..
-	mv Makefile ..
-	cp ~/.src/SAMPLE_C_PROJECT/.gitignore ..
-	cp -r ~/.src/SAMPLE_C_PROJECT/.github ..
-	touch ../obj/.keep
-	touch ../lib/obj/.keep
+tests_run: all ## The rule called by Marvin to make coverage
 
 .PHONY: make_prog
 make_prog: re
