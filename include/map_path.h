@@ -10,9 +10,10 @@
 
     #include <stddef.h>
     #include "runner_constants.h"
-    #define NUMBER_MAPS 9
+    #define NUMBER_MAPS 10
 
 static const char MAPS[NUMBER_MAPS][MAX_CHAR_IN_SETTINGS] = {
+    "map/the_amazing.txt",
     "map/aurelie.txt",
     "map/42.txt",
     "map/basic.txt",
